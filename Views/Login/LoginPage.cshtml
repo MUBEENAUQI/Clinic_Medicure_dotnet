@@ -1,0 +1,64 @@
+﻿@model Clinic_Automation.Models.LoginModel
+
+@{
+    ViewBag.Title = "LoginPage";
+}
+
+<style>
+    .login-box {
+        background-color: white;
+        width: 300px;
+        padding: 20px;
+        margin-block: 20px;
+    }
+
+    .login-box {
+        background-color: white;
+        width: 300px;
+        padding: 20px;
+        margin: 50px auto;
+    }
+
+        .login-box .form-group {
+            margin-bottom: 15px;
+        }
+</style>
+@using (Html.BeginForm("", "Login", FormMethod.Post))
+{
+    <div class="row justify-content-end" style="background-image: url('../../Assets/LoginImage.png'); background-repeat: no-repeat; background-size: cover;">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="login-box text-center">
+                <h2 style="font-weight: bold; font-size: 24px; margin-bottom: 20px;">Login Page</h2>
+                <form style="margin-bottom:10px">
+                    <div class="form-group">
+                        @Html.DropDownListFor(a => a.Account_id, Model.Account_List, "Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.Account_id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(a => a.User_name, new { @class = "form-control", placeholder = "Username" })
+                        @Html.ValidationMessageFor(a => a.User_name, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(a => a.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(a => a.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-success" />
+                    <div class="text-danger">
+                        @ViewBag.Message
+                    </div>
+
+
+                </form>
+                <div style="text-align:left">
+                    <button type="button" class="btn btn-link" onclick="location.href='@Url.Action("GuestMed", "Guest")'">Check out our Drugstore</button>
+                    <button type="button" class="btn btn-link" onclick="location.href='@Url.Action("GuestDoc", "Guest")'">Check out our doctors</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}

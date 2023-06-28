@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedicareModelStoreContainer" CdmEntityContainer="MedicareEntities">
+    <FunctionImportMapping FunctionImportName="Get_Account_Type" FunctionName="MedicareModel.Store.Get_Account_Type">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Get_Account_Type_Result">
+          <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+          <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Login_Check" FunctionName="MedicareModel.Store.Login_Check">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Login_Check_Result">
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+          <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

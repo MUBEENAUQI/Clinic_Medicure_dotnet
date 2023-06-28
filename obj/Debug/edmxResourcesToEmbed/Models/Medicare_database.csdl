@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MedicareEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="Get_Account_Type" ReturnType="Collection(MedicareModel.Get_Account_Type_Result)" />
+    <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel.Login_Check_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Get_Account_Type_Result">
+    <Property Type="Int32" Name="Account_ID" Nullable="false" />
+    <Property Type="String" Name="Account_name" Nullable="false" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="Login_Check_Result">
+    <Property Type="Int32" Name="Login_ID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Account_ID" Nullable="true" />
+    <Property Type="String" Name="Account_name" Nullable="true" MaxLength="15" />
+  </ComplexType>
+</Schema>
