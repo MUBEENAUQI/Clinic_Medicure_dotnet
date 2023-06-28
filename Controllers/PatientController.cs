@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace Clinic_Automation.Controllers
 {
+
+    [OutputCache(NoStore = true, Location = System.Web.UI.OutputCacheLocation.None)]
+    [Authorize]
     public class PatientController : Controller
     {
         // GET: Patient

@@ -11,66 +11,74 @@ namespace Clinic_Automation.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        
+        [OutputCache(NoStore = true, Location = System.Web.UI.OutputCacheLocation.None)]
         public ActionResult Login()
         {
             LoginModel model = new LoginModel();
             model.Account_List = Account_list_get.GetAccountList();
             return View("LoginPage", model);
         }
+
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
-
-                using (MedicareEntities db = new MedicareEntities())
-                {
-                    var getdata = db.Login_Check(model.User_name, model.Password).FirstOrDefault();
-                    if (getdata != null)
+                
+                    using (MedicareEntities db = new MedicareEntities())
                     {
-                        FormsAuthentication.SetAuthCookie(model.User_name, true);
-                        var ticket = new FormsAuthenticationTicket(1, model.User_name, DateTime.Now, DateTime.Now.AddHours(1), true, model.User_name);
-                        string encryptTicket = FormsAuthentication.Encrypt(ticket);
-                        var authcookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptTicket);
-                        HttpContext.Response.Cookies.Add(authcookie);
-                        if (model.Account_id == 1)
+                        var getdata = db.Login_Check(model.User_name, model.Password).FirstOrDefault();
+                        if (getdata != null)
                         {
-                            return RedirectToAction("Patient", "Patient");
-                        }else if(model.Account_id == 2)
-                        {
-                            if (model.User_name=="Admin" && model.Password == "Admin")
+                            FormsAuthentication.SetAuthCookie(model.User_name, true);
+                            var ticket = new FormsAuthenticationTicket(1, model.User_name, DateTime.Now, DateTime.Now.AddHours(1), true, model.User_name);
+                            string encryptTicket = FormsAuthentication.Encrypt(ticket);
+                            var authcookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptTicket);
+                            HttpContext.Response.Cookies.Add(authcookie);
+                            if (model.Account_id == 1)
                             {
-                               return RedirectToAction("Admin", "Admin");
+                                return RedirectToAction("Patient", "Patient");
+                            }
+                            else if (model.Account_id == 2)
+                            {
+                                if (model.User_name == "Admin" && model.Password == "Admin")
+                                {
+                                    return RedirectToAction("Admin", "Admin");
+                                }
+                                else
+                                {
+                                    return RedirectToAction("Doctor", "Doctor");
+                                }
+                            }
+                            else if (model.Account_id == 3)
+                            {
+                                return RedirectToAction("Supplier", "Supplier");
+                            }
+                            else if (model.Account_id == 4)
+                            {
+                                return RedirectToAction("Salesman", "Salesman");
                             }
                             else
-                            return RedirectToAction("Doctor", "Doctor");
-                        }
-                        else if (model.Account_id == 3)
-                        {
-                            return RedirectToAction("Supplier", "Supplier");
-                        }
-                        else if (model.Account_id == 4)
-                        {
-                            return RedirectToAction("Salesman", "Salesman");
+                            {
+                                ViewBag.Message = "Invalid Username or Password";
+                            }
                         }
                         else
                         {
                             ViewBag.Message = "Invalid Username or Password";
                         }
                     }
-                    else
-                    {
-
-                        ViewBag.Message = "Invalid Username or Password";
-
-                    }
                 }
-            }
+               
+            
+
             model.Account_List = Account_list_get.GetAccountList();
             return View("LoginPage", model);
-
         }
 
+        public ActionResult UnauthorizedAccess()
+        {
+            return View();
+        }
     }
 }
