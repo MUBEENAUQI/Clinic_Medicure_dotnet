@@ -214,6 +214,8 @@
     <Content Include="Views\Salesman\SalesmanPage.cshtml" />
     <Content Include="Views\Guest\GuestDoctorPage.cshtml" />
     <Content Include="Views\Guest\GuestMedicinePage.cshtml" />
+    <Content Include="Views\Admin\_Layout.cshtml" />
+    <Content Include="Views\Login\UnauthorizedAccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

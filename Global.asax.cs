@@ -15,6 +15,12 @@ namespace Clinic_Automation
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            RouteTable.Routes.MapRoute(
+               name: "Unauthorized",
+               url: "Login/UnauthorizedAccess",
+               defaults: new { controller = "Login", action = "UnauthorizedAccess" }
+           );
         }
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
@@ -29,6 +35,18 @@ namespace Clinic_Automation
                     HttpContext.Current.User = new GenericPrincipal(new FormsIdentity(ticket), roles);
 
                 }
+            }
+        }
+
+        protected void Application_EndRequest()
+        {
+            var context = new HttpContextWrapper(Context);
+            if (context.Response.StatusCode == 401)
+            {
+                Response.Clear();
+
+                // Redirect to the UnauthorizedAccess action in the Login controller
+                Response.RedirectToRoute("Unauthorized");
             }
         }
     }
