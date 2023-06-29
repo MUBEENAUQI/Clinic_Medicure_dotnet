@@ -27,6 +27,7 @@ namespace Clinic_Automation.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Medicine> Medicines { get; set; }
     
         public virtual ObjectResult<Get_Account_Type_Result> Get_Account_Type()
         {

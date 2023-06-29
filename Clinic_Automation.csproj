@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\search.png" />
     <Content Include="Assets\LoginImage.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -170,6 +171,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Medicare_database.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Medicine.cs">
+      <DependentUpon>Medicare_database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +217,7 @@
     <Content Include="Views\Supplier\SupplierPage.cshtml" />
     <Content Include="Views\Salesman\SalesmanPage.cshtml" />
     <Content Include="Views\Guest\GuestDoctorPage.cshtml" />
-    <Content Include="Views\Guest\GuestMedicinePage.cshtml" />
+    <Content Include="Views\Guest\GuestMed.cshtml" />
     <Content Include="Views\Admin\_Layout.cshtml" />
     <Content Include="Views\Login\UnauthorizedAccess.cshtml" />
     <None Include="Web.Debug.config">

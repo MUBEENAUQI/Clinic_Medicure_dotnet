@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clinic_Automation.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,11 @@ namespace Clinic_Automation.Controllers
     public class GuestController : Controller
     {
         // GET: Guest
-        public ActionResult GuestMed()
+        MedicareEntities db = new MedicareEntities();
+
+        public ActionResult GuestMed(String searching)
         {
-            return View("GuestMedicinePage");
+            return View(db.Medicines.Where(x => x.Name.Contains(searching) || searching == null).ToList().OrderBy(x => x.Name));
         }
         public ActionResult GuestDoc()
         {
