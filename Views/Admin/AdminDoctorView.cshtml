@@ -1,0 +1,124 @@
+﻿@model List<Clinic_Automation.Models.DoctorModel>
+
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    //ViewBag.Title = "View Doctor List";
+}
+<style>
+    .doctor-card {
+        display: flex;
+        align-items: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .doctor-card-image {
+        flex: 0 0 150px; /* Adjust the image width as desired */
+        padding: 10px;
+        border: 1px solid #ccc; /* Add border styles */
+        /* Make the border circular */
+        overflow: hidden; /* Hide the overflow if the image exceeds the border */
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+        .doctor-card-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .doctor-card-details {
+        flex: 1;
+        padding: 10px;
+    }
+
+        .doctor-card-details h5 {
+            margin-top: 0;
+            font-size: 14px; /* Adjust the font size as desired */
+        }
+
+        .doctor-card-details p {
+            font-size: 12px; /* Adjust the font size for other details */
+        }
+
+    .doctor-card-actions {
+        flex: 0 0 140px; /* Adjust the width of the actions container as desired */
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 10px;
+    }
+
+        .doctor-card-actions a {
+            margin-left: 5px; /* Add margin between the buttons */
+        }
+</style>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="flex-container" style="display: flex; align-items: center; justify-content: space-between; padding-inline-end: 1.5em;">
+    <h2>View Doctor List</h2>
+    <div>
+        <a href="@Url.Action("AddDoctor", "Admin")" class="btn btn-success">Add Doctor</a>
+    </div>
+</div>
+@if (Model.Count == 0)
+{
+    <div style="display: flex; align-items: center; justify-content: center; height: 60vh;">
+        <img src="~/Assets/NoData.jpg" style="max-width: 300px; max-height: 400px;" alt="No Data Image">
+    </div>
+}
+else
+{
+    <div style="margin-top: 1em;">
+        @foreach (var doctor in Model)
+        {
+            <div class="doctor-card">
+                <div class="doctor-card-image">
+                    @if (doctor.Doctor_Gender == "Female")
+                    {
+                        <img src="@Url.Content("~/Assets/FemaleDoc.png")" alt="Doctor Avatar">
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Assets/MaleDoc.jpg")" alt="Doctor Avatar">
+                    }
+                </div>
+                <div class="doctor-card-details">
+                    <div>
+                        <h4>@doctor.Doctor_name</h4>
+                        <strong>Specialty:</strong> @doctor.Doctor_Specialty<br />
+                        <strong>Qualification:</strong> @doctor.Doctor_Qualification<br />
+                        <strong>Experience:</strong> @doctor.Doctor_Experience Years<br />
+                    </div>
+                    <div>
+                        <strong>Fees:</strong> @doctor.Doctor_Fees<br />
+                        <strong>Email:</strong> @doctor.Doctor_Email<br />
+                        <strong>Phone:</strong> @doctor.Doctor_Phone<br />
+                    </div>
+                </div>
+                <div class="doctor-card-actions">
+                    <a href="@Url.Action("EditDoctor", "Admin", new { id = doctor.Doctor_id })" class="btn btn-outline-warning">Edit</a>
+                    <a href="@Url.Action("DeleteDoctor", "Admin", new { id = doctor.Doctor_id })" class="btn btn-outline-danger delete-doctor" data-doctor-name="@doctor.Doctor_name">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".delete-doctor").on("click", function (e) {
+            e.preventDefault();
+
+            var doctorName = $(this).data("doctor-name");
+            if (confirm("Are you sure you want to delete " + doctorName + "?")) {
+                window.location.href = $(this).attr("href");
+            }
+        });
+    });
+</script>

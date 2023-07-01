@@ -6,6 +6,23 @@
       <Parameter Name="username" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Add_Doctor">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="speciality" Mode="In" Type="String" />
+      <Parameter Name="experience" Mode="In" Type="Int32" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="qualification" Mode="In" Type="String" />
+      <Parameter Name="fees" Mode="In" Type="Int32" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Add_LoginData">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="accountid" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Get_Account_Type_Result">
     <Property Type="Int32" Name="Account_ID" Nullable="false" />

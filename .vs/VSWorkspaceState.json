@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\Views",
+    "\\Views\\Admin"
   ],
-  "SelectedNode": "\\Controllers\\LoginController.cs",
+  "SelectedNode": "\\Views\\Admin\\AdminDoctorView.cshtml",
   "PreviewInSolutionExplorer": false
 }

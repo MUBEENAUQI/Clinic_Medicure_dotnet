@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MedicareEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="Add_Doctor">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="speciality" Mode="In" Type="String" />
+      <Parameter Name="experience" Mode="In" Type="Int32" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="qualification" Mode="In" Type="String" />
+      <Parameter Name="fees" Mode="In" Type="Int32" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Add_LoginData">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="accountid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteDoctor">
+      <Parameter Name="DoctorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Account_Type" ReturnType="Collection(MedicareModel.Get_Account_Type_Result)" />
+    <FunctionImport Name="Get_DoctorData" ReturnType="Collection(MedicareModel.Get_DoctorData_Result)" />
+    <FunctionImport Name="Get_DoctorData_byID" ReturnType="Collection(MedicareModel.Get_DoctorData_byID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel.Login_Check_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="accid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_DoctorData">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="speciality" Mode="In" Type="String" />
+      <Parameter Name="experience" Mode="In" Type="Int32" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="qualification" Mode="In" Type="String" />
+      <Parameter Name="fees" Mode="In" Type="Int32" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="loginid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Get_Account_Type_Result">
+    <Property Type="Int32" Name="Account_ID" Nullable="false" />
+    <Property Type="String" Name="Account_name" Nullable="false" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="Get_DoctorData_Result">
+    <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+    <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
+    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="Get_DoctorData_byID_Result">
+    <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+    <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
+    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="Login_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Login_Check_Result">
+    <Property Type="Int32" Name="Login_ID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Account_ID" Nullable="true" />
+    <Property Type="String" Name="Account_name" Nullable="true" MaxLength="15" />
+  </ComplexType>
+</Schema>

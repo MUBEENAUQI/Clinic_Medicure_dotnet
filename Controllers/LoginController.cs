@@ -27,7 +27,7 @@ namespace Clinic_Automation.Controllers
                 
                     using (MedicareEntities db = new MedicareEntities())
                     {
-                        var getdata = db.Login_Check(model.User_name, model.Password).FirstOrDefault();
+                        var getdata = db.Login_Check(model.User_name, model.Password,model.Account_id).FirstOrDefault();
                         if (getdata != null)
                         {
                             FormsAuthentication.SetAuthCookie(model.User_name, true);
