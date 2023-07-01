@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedicareModelStoreContainer" CdmEntityContainer="MedicareEntities">
+    <FunctionImportMapping FunctionImportName="Add_Doctor" FunctionName="MedicareModel.Store.Add_Doctor" />
+    <FunctionImportMapping FunctionImportName="Add_LoginData" FunctionName="MedicareModel.Store.Add_LoginData" />
+    <FunctionImportMapping FunctionImportName="DeleteDoctor" FunctionName="MedicareModel.Store.DeleteDoctor" />
+    <FunctionImportMapping FunctionImportName="Get_Account_Type" FunctionName="MedicareModel.Store.Get_Account_Type">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Get_Account_Type_Result">
+          <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+          <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_DoctorData" FunctionName="MedicareModel.Store.Get_DoctorData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Get_DoctorData_Result">
+          <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+          <ScalarProperty Name="Doctor_name" ColumnName="Doctor_name" />
+          <ScalarProperty Name="Doctor_Specialty" ColumnName="Doctor_Specialty" />
+          <ScalarProperty Name="Doctor_Experience" ColumnName="Doctor_Experience" />
+          <ScalarProperty Name="Doctor_Email" ColumnName="Doctor_Email" />
+          <ScalarProperty Name="Doctor_Phone" ColumnName="Doctor_Phone" />
+          <ScalarProperty Name="Doctor_Qualification" ColumnName="Doctor_Qualification" />
+          <ScalarProperty Name="Doctor_Fees" ColumnName="Doctor_Fees" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_DoctorData_byID" FunctionName="MedicareModel.Store.Get_DoctorData_byID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Get_DoctorData_byID_Result">
+          <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+          <ScalarProperty Name="Doctor_name" ColumnName="Doctor_name" />
+          <ScalarProperty Name="Doctor_Specialty" ColumnName="Doctor_Specialty" />
+          <ScalarProperty Name="Doctor_Experience" ColumnName="Doctor_Experience" />
+          <ScalarProperty Name="Doctor_Email" ColumnName="Doctor_Email" />
+          <ScalarProperty Name="Doctor_Phone" ColumnName="Doctor_Phone" />
+          <ScalarProperty Name="Doctor_Qualification" ColumnName="Doctor_Qualification" />
+          <ScalarProperty Name="Doctor_Fees" ColumnName="Doctor_Fees" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Login_Check" FunctionName="MedicareModel.Store.Login_Check">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Login_Check_Result">
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+          <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Update_DoctorData" FunctionName="MedicareModel.Store.Update_DoctorData" />
+  </EntityContainerMapping>
+</Mapping>

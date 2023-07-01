@@ -116,15 +116,15 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Medicare_database.Context.tt">
+    <Content Include="Models\MedicareEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Medicare_database.Context.cs</LastGenOutput>
-      <DependentUpon>Medicare_database.edmx</DependentUpon>
+      <DependentUpon>MedicareEntities.edmx</DependentUpon>
+      <LastGenOutput>MedicareEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Medicare_database.tt">
+    <Content Include="Models\MedicareEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Medicare_database.edmx</DependentUpon>
-      <LastGenOutput>Medicare_database.cs</LastGenOutput>
+      <DependentUpon>MedicareEntities.edmx</DependentUpon>
+      <LastGenOutput>MedicareEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -132,6 +132,18 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\MedicareEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MedicareEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MedicareEntities.edmx.diagram">
+      <DependentUpon>MedicareEntities.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -147,28 +159,35 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account_list_get.cs" />
+    <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\Get_Account_Type_Result.cs">
-      <DependentUpon>Medicare_database.tt</DependentUpon>
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Get_DoctorData_byID_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Get_DoctorData_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogAction.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Login_Check_Result.cs">
-      <DependentUpon>Medicare_database.tt</DependentUpon>
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Medicare_database.Context.cs">
+    <Compile Include="Models\MedicareEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Medicare_database.Context.tt</DependentUpon>
+      <DependentUpon>MedicareEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Medicare_database.cs">
+    <Compile Include="Models\MedicareEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Medicare_database.tt</DependentUpon>
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Medicare_database.Designer.cs">
+    <Compile Include="Models\MedicareEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Medicare_database.edmx</DependentUpon>
+      <DependentUpon>MedicareEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -190,13 +209,6 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\Medicare_database.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Medicare_database.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Medicare_database.edmx.diagram">
-      <DependentUpon>Medicare_database.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -209,13 +221,16 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Patient\PatientPage.cshtml" />
     <Content Include="Views\Doctor\DoctorPage.cshtml" />
-    <Content Include="Views\Admin\AdminPage.cshtml" />
+    <Content Include="Views\Admin\AdminDoctorView.cshtml" />
     <Content Include="Views\Supplier\SupplierPage.cshtml" />
     <Content Include="Views\Salesman\SalesmanPage.cshtml" />
     <Content Include="Views\Guest\GuestDoctorPage.cshtml" />
     <Content Include="Views\Guest\GuestMedicinePage.cshtml" />
     <Content Include="Views\Admin\_Layout.cshtml" />
     <Content Include="Views\Login\UnauthorizedAccess.cshtml" />
+    <Content Include="Views\Admin\AdminDoctorAdd.cshtml" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
