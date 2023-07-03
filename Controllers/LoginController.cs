@@ -43,7 +43,7 @@ namespace Clinic_Automation.Controllers
                             {
                                 if (model.User_name == "Admin" && model.Password == "Admin")
                                 {
-                                    return RedirectToAction("Admin", "Admin");
+                                    return RedirectToAction("Doctor", "Admin");
                                 }
                                 else
                                 {

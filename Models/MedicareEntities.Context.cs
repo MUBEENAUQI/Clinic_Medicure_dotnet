@@ -27,6 +27,8 @@ namespace Clinic_Automation.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Medicine> Medicines { get; set; }
+        public virtual DbSet<OrderList> OrderLists { get; set; }
     
         public virtual int Add_Doctor(string name, string speciality, Nullable<int> experience, string phone, string email, string qualification, Nullable<int> fees, string gender, string username, string password)
         {
@@ -118,6 +120,11 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_DoctorData_byID_Result>("Get_DoctorData_byID", idParameter);
         }
     
+        public virtual ObjectResult<GetMedicineList_Result> GetMedicineList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMedicineList_Result>("GetMedicineList");
+        }
+    
         public virtual ObjectResult<Login_Check_Result> Login_Check(string username, string password, Nullable<int> accid)
         {
             var usernameParameter = username != null ?
@@ -133,6 +140,157 @@ namespace Clinic_Automation.Models
                 new ObjectParameter("accid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Check_Result>("Login_Check", usernameParameter, passwordParameter, accidParameter);
+        }
+    
+        public virtual int patient_details_delete(Nullable<int> p_id)
+        {
+            var p_idParameter = p_id.HasValue ?
+                new ObjectParameter("p_id", p_id) :
+                new ObjectParameter("p_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("patient_details_delete", p_idParameter);
+        }
+    
+        public virtual int patient_details_insert(string p_name, string p_email, Nullable<System.DateTime> p_dob, string p_phone, string p_gender, string p_bloodgrp, string p_address, Nullable<decimal> p_weight, Nullable<decimal> p_height, string p_prescription, string username, string password)
+        {
+            var p_nameParameter = p_name != null ?
+                new ObjectParameter("p_name", p_name) :
+                new ObjectParameter("p_name", typeof(string));
+    
+            var p_emailParameter = p_email != null ?
+                new ObjectParameter("p_email", p_email) :
+                new ObjectParameter("p_email", typeof(string));
+    
+            var p_dobParameter = p_dob.HasValue ?
+                new ObjectParameter("p_dob", p_dob) :
+                new ObjectParameter("p_dob", typeof(System.DateTime));
+    
+            var p_phoneParameter = p_phone != null ?
+                new ObjectParameter("p_phone", p_phone) :
+                new ObjectParameter("p_phone", typeof(string));
+    
+            var p_genderParameter = p_gender != null ?
+                new ObjectParameter("p_gender", p_gender) :
+                new ObjectParameter("p_gender", typeof(string));
+    
+            var p_bloodgrpParameter = p_bloodgrp != null ?
+                new ObjectParameter("p_bloodgrp", p_bloodgrp) :
+                new ObjectParameter("p_bloodgrp", typeof(string));
+    
+            var p_addressParameter = p_address != null ?
+                new ObjectParameter("p_address", p_address) :
+                new ObjectParameter("p_address", typeof(string));
+    
+            var p_weightParameter = p_weight.HasValue ?
+                new ObjectParameter("p_weight", p_weight) :
+                new ObjectParameter("p_weight", typeof(decimal));
+    
+            var p_heightParameter = p_height.HasValue ?
+                new ObjectParameter("p_height", p_height) :
+                new ObjectParameter("p_height", typeof(decimal));
+    
+            var p_prescriptionParameter = p_prescription != null ?
+                new ObjectParameter("p_prescription", p_prescription) :
+                new ObjectParameter("p_prescription", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("patient_details_insert", p_nameParameter, p_emailParameter, p_dobParameter, p_phoneParameter, p_genderParameter, p_bloodgrpParameter, p_addressParameter, p_weightParameter, p_heightParameter, p_prescriptionParameter, usernameParameter, passwordParameter);
+        }
+    
+        public virtual int patient_details_update(Nullable<int> p_id, string p_name, string p_email, Nullable<System.DateTime> p_dob, string p_phone, string p_gender, string p_bloodgrp, string p_address, Nullable<decimal> p_weight, Nullable<decimal> p_height, string p_prescription)
+        {
+            var p_idParameter = p_id.HasValue ?
+                new ObjectParameter("p_id", p_id) :
+                new ObjectParameter("p_id", typeof(int));
+    
+            var p_nameParameter = p_name != null ?
+                new ObjectParameter("p_name", p_name) :
+                new ObjectParameter("p_name", typeof(string));
+    
+            var p_emailParameter = p_email != null ?
+                new ObjectParameter("p_email", p_email) :
+                new ObjectParameter("p_email", typeof(string));
+    
+            var p_dobParameter = p_dob.HasValue ?
+                new ObjectParameter("p_dob", p_dob) :
+                new ObjectParameter("p_dob", typeof(System.DateTime));
+    
+            var p_phoneParameter = p_phone != null ?
+                new ObjectParameter("p_phone", p_phone) :
+                new ObjectParameter("p_phone", typeof(string));
+    
+            var p_genderParameter = p_gender != null ?
+                new ObjectParameter("p_gender", p_gender) :
+                new ObjectParameter("p_gender", typeof(string));
+    
+            var p_bloodgrpParameter = p_bloodgrp != null ?
+                new ObjectParameter("p_bloodgrp", p_bloodgrp) :
+                new ObjectParameter("p_bloodgrp", typeof(string));
+    
+            var p_addressParameter = p_address != null ?
+                new ObjectParameter("p_address", p_address) :
+                new ObjectParameter("p_address", typeof(string));
+    
+            var p_weightParameter = p_weight.HasValue ?
+                new ObjectParameter("p_weight", p_weight) :
+                new ObjectParameter("p_weight", typeof(decimal));
+    
+            var p_heightParameter = p_height.HasValue ?
+                new ObjectParameter("p_height", p_height) :
+                new ObjectParameter("p_height", typeof(decimal));
+    
+            var p_prescriptionParameter = p_prescription != null ?
+                new ObjectParameter("p_prescription", p_prescription) :
+                new ObjectParameter("p_prescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("patient_details_update", p_idParameter, p_nameParameter, p_emailParameter, p_dobParameter, p_phoneParameter, p_genderParameter, p_bloodgrpParameter, p_addressParameter, p_weightParameter, p_heightParameter, p_prescriptionParameter);
+        }
+    
+        public virtual ObjectResult<patient_details_view_Result> patient_details_view()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<patient_details_view_Result>("patient_details_view");
+        }
+    
+        public virtual ObjectResult<patientById_Result> patientById(Nullable<int> p_id)
+        {
+            var p_idParameter = p_id.HasValue ?
+                new ObjectParameter("p_id", p_id) :
+                new ObjectParameter("p_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<patientById_Result>("patientById", p_idParameter);
+        }
+    
+        public virtual ObjectResult<SearchMedicine_Result> SearchMedicine(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchMedicine_Result>("SearchMedicine", nameParameter);
+        }
+    
+        public virtual int SupplyMedicine(Nullable<int> medicineID, Nullable<int> quantity, Nullable<int> orderId)
+        {
+            var medicineIDParameter = medicineID.HasValue ?
+                new ObjectParameter("medicineID", medicineID) :
+                new ObjectParameter("medicineID", typeof(int));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(int));
+    
+            var orderIdParameter = orderId.HasValue ?
+                new ObjectParameter("orderId", orderId) :
+                new ObjectParameter("orderId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SupplyMedicine", medicineIDParameter, quantityParameter, orderIdParameter);
         }
     
         public virtual int Update_DoctorData(string name, string speciality, Nullable<int> experience, string phone, string email, string qualification, Nullable<int> fees, string gender, string username, string password, Nullable<int> loginid)

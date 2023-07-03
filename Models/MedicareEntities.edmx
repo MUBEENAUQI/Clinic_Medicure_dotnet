@@ -4,7 +4,43 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MedicareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MedicareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Medicines">
+          <Key>
+            <PropertyRef Name="MedicineID" />
+          </Key>
+          <Property Name="MedicineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="50" />
+          <Property Name="Dosage" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="ExpiryDate" Type="date" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderList">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MedicineID" Type="int" Nullable="false" />
+          <Property Name="MedicineName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="OrderStatus" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OrderList_Medicines">
+          <End Role="Medicines" Type="Self.Medicines" Multiplicity="1" />
+          <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicines">
+              <PropertyRef Name="MedicineID" />
+            </Principal>
+            <Dependent Role="OrderList">
+              <PropertyRef Name="MedicineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Add_Doctor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
           <Parameter Name="speciality" Type="varchar" Mode="In" />
@@ -30,10 +66,53 @@
         <Function Name="Get_DoctorData_byID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetMedicineList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Login_Check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
           <Parameter Name="accid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="patient_details_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="patient_details_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_name" Type="varchar" Mode="In" />
+          <Parameter Name="p_email" Type="varchar" Mode="In" />
+          <Parameter Name="p_dob" Type="date" Mode="In" />
+          <Parameter Name="p_phone" Type="varchar" Mode="In" />
+          <Parameter Name="p_gender" Type="varchar" Mode="In" />
+          <Parameter Name="p_bloodgrp" Type="varchar" Mode="In" />
+          <Parameter Name="p_address" Type="varchar" Mode="In" />
+          <Parameter Name="p_weight" Type="decimal" Mode="In" />
+          <Parameter Name="p_height" Type="decimal" Mode="In" />
+          <Parameter Name="p_prescription" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="patient_details_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_id" Type="int" Mode="In" />
+          <Parameter Name="p_name" Type="varchar" Mode="In" />
+          <Parameter Name="p_email" Type="varchar" Mode="In" />
+          <Parameter Name="p_dob" Type="date" Mode="In" />
+          <Parameter Name="p_phone" Type="varchar" Mode="In" />
+          <Parameter Name="p_gender" Type="varchar" Mode="In" />
+          <Parameter Name="p_bloodgrp" Type="varchar" Mode="In" />
+          <Parameter Name="p_address" Type="varchar" Mode="In" />
+          <Parameter Name="p_weight" Type="decimal" Mode="In" />
+          <Parameter Name="p_height" Type="decimal" Mode="In" />
+          <Parameter Name="p_prescription" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="patient_details_view" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="patientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SearchMedicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SupplyMedicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="medicineID" Type="int" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="orderId" Type="int" Mode="In" />
         </Function>
         <Function Name="Update_DoctorData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
@@ -48,13 +127,64 @@
           <Parameter Name="password" Type="varchar" Mode="In" />
           <Parameter Name="loginid" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="MedicareModelStoreContainer" />
+        <EntityContainer Name="MedicareModelStoreContainer">
+          <EntitySet Name="Medicines" EntityType="Self.Medicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderList" EntityType="Self.OrderList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OrderList_Medicines" Association="Self.FK_OrderList_Medicines">
+            <End Role="Medicines" EntitySet="Medicines" />
+            <End Role="OrderList" EntitySet="OrderList" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MedicareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="MedicareEntities" annotation:LazyLoadingEnabled="true" >
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="MedicineID" />
+          </Key>
+          <Property Name="MedicineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="OrderLists" Relationship="Self.FK_OrderList_Medicines" FromRole="Medicines" ToRole="OrderList" />
+        </EntityType>
+        <EntityType Name="OrderList">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedicineID" Type="Int32" Nullable="false" />
+          <Property Name="MedicineName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderStatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_OrderList_Medicines" FromRole="OrderList" ToRole="Medicines" />
+        </EntityType>
+        <Association Name="FK_OrderList_Medicines">
+          <End Role="Medicines" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicines">
+              <PropertyRef Name="MedicineID" />
+            </Principal>
+            <Dependent Role="OrderList">
+              <PropertyRef Name="MedicineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+          <EntitySet Name="OrderLists" EntityType="Self.OrderList" />
+          <AssociationSet Name="FK_OrderList_Medicines" Association="Self.FK_OrderList_Medicines">
+            <End Role="Medicines" EntitySet="Medicines" />
+            <End Role="OrderList" EntitySet="OrderLists" />
+          </AssociationSet>
           <FunctionImport Name="Add_Doctor">
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="speciality" Mode="In" Type="String" />
@@ -80,10 +210,53 @@
           <FunctionImport Name="Get_DoctorData_byID" ReturnType="Collection(MedicareModel.Get_DoctorData_byID_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetMedicineList" ReturnType="Collection(MedicareModel.GetMedicineList_Result)" />
           <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel.Login_Check_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="accid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="patient_details_delete">
+            <Parameter Name="p_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="patient_details_insert">
+            <Parameter Name="p_name" Mode="In" Type="String" />
+            <Parameter Name="p_email" Mode="In" Type="String" />
+            <Parameter Name="p_dob" Mode="In" Type="DateTime" />
+            <Parameter Name="p_phone" Mode="In" Type="String" />
+            <Parameter Name="p_gender" Mode="In" Type="String" />
+            <Parameter Name="p_bloodgrp" Mode="In" Type="String" />
+            <Parameter Name="p_address" Mode="In" Type="String" />
+            <Parameter Name="p_weight" Mode="In" Type="Decimal" />
+            <Parameter Name="p_height" Mode="In" Type="Decimal" />
+            <Parameter Name="p_prescription" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="patient_details_update">
+            <Parameter Name="p_id" Mode="In" Type="Int32" />
+            <Parameter Name="p_name" Mode="In" Type="String" />
+            <Parameter Name="p_email" Mode="In" Type="String" />
+            <Parameter Name="p_dob" Mode="In" Type="DateTime" />
+            <Parameter Name="p_phone" Mode="In" Type="String" />
+            <Parameter Name="p_gender" Mode="In" Type="String" />
+            <Parameter Name="p_bloodgrp" Mode="In" Type="String" />
+            <Parameter Name="p_address" Mode="In" Type="String" />
+            <Parameter Name="p_weight" Mode="In" Type="Decimal" />
+            <Parameter Name="p_height" Mode="In" Type="Decimal" />
+            <Parameter Name="p_prescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="patient_details_view" ReturnType="Collection(MedicareModel.patient_details_view_Result)" />
+          <FunctionImport Name="patientById" ReturnType="Collection(MedicareModel.patientById_Result)">
+            <Parameter Name="p_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchMedicine" ReturnType="Collection(MedicareModel.SearchMedicine_Result)">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SupplyMedicine">
+            <Parameter Name="medicineID" Mode="In" Type="Int32" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="orderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Update_DoctorData">
             <Parameter Name="name" Mode="In" Type="String" />
@@ -108,7 +281,7 @@
           <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
-          <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
@@ -121,7 +294,7 @@
           <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
-          <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
@@ -130,6 +303,16 @@
           <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
           <Property Type="Int32" Name="Login_ID" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetMedicineList_Result">
+          <Property Type="Int32" Name="MedicineID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Dosage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="Login_Check_Result">
           <Property Type="Int32" Name="Login_ID" Nullable="false" />
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
@@ -137,12 +320,76 @@
           <Property Type="Int32" Name="Account_ID" Nullable="true" />
           <Property Type="String" Name="Account_name" Nullable="true" MaxLength="15" />
         </ComplexType>
+        <ComplexType Name="patient_details_view_Result">
+          <Property Type="Int32" Name="Patient_Id" Nullable="false" />
+          <Property Type="String" Name="Patient_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Email" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Patient_Birthday" Nullable="false" />
+          <Property Type="String" Name="Patient_Phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_gender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Bloodgrp" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Address" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Patient_Weight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Patient_Height" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Patient_Prescription" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Login_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="patientById_Result">
+          <Property Type="String" Name="Patient_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Email" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Patient_Birthday" Nullable="false" />
+          <Property Type="String" Name="Patient_Phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_gender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Bloodgrp" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Address" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Patient_Weight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Patient_Height" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Patient_Prescription" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SearchMedicine_Result">
+          <Property Type="Int32" Name="MedicineID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Dosage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MedicareModelStoreContainer" CdmEntityContainer="MedicareEntities" >
+        <EntityContainerMapping StorageEntityContainer="MedicareModelStoreContainer" CdmEntityContainer="MedicareEntities">
+          <EntitySetMapping Name="Medicines">
+            <EntityTypeMapping TypeName="MedicareModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicines">
+                <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLists">
+            <EntityTypeMapping TypeName="MedicareModel.OrderList">
+              <MappingFragment StoreEntitySet="OrderList">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+                <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Add_Doctor" FunctionName="MedicareModel.Store.Add_Doctor" />
           <FunctionImportMapping FunctionImportName="Add_LoginData" FunctionName="MedicareModel.Store.Add_LoginData" />
           <FunctionImportMapping FunctionImportName="DeleteDoctor" FunctionName="MedicareModel.Store.DeleteDoctor" />
@@ -189,6 +436,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMedicineList" FunctionName="MedicareModel.Store.GetMedicineList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.GetMedicineList_Result">
+                <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Login_Check" FunctionName="MedicareModel.Store.Login_Check">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.Login_Check_Result">
@@ -200,6 +461,60 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="patient_details_delete" FunctionName="MedicareModel.Store.patient_details_delete" />
+          <FunctionImportMapping FunctionImportName="patient_details_insert" FunctionName="MedicareModel.Store.patient_details_insert" />
+          <FunctionImportMapping FunctionImportName="patient_details_update" FunctionName="MedicareModel.Store.patient_details_update" />
+          <FunctionImportMapping FunctionImportName="patient_details_view" FunctionName="MedicareModel.Store.patient_details_view">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.patient_details_view_Result">
+                <ScalarProperty Name="Patient_Id" ColumnName="Patient_Id" />
+                <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+                <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
+                <ScalarProperty Name="Patient_Birthday" ColumnName="Patient_Birthday" />
+                <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+                <ScalarProperty Name="Patient_gender" ColumnName="Patient_gender" />
+                <ScalarProperty Name="Patient_Bloodgrp" ColumnName="Patient_Bloodgrp" />
+                <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+                <ScalarProperty Name="Patient_Weight" ColumnName="Patient_Weight" />
+                <ScalarProperty Name="Patient_Height" ColumnName="Patient_Height" />
+                <ScalarProperty Name="Patient_Prescription" ColumnName="Patient_Prescription" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="patientById" FunctionName="MedicareModel.Store.patientById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.patientById_Result">
+                <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+                <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
+                <ScalarProperty Name="Patient_Birthday" ColumnName="Patient_Birthday" />
+                <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+                <ScalarProperty Name="Patient_gender" ColumnName="Patient_gender" />
+                <ScalarProperty Name="Patient_Bloodgrp" ColumnName="Patient_Bloodgrp" />
+                <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+                <ScalarProperty Name="Patient_Weight" ColumnName="Patient_Weight" />
+                <ScalarProperty Name="Patient_Height" ColumnName="Patient_Height" />
+                <ScalarProperty Name="Patient_Prescription" ColumnName="Patient_Prescription" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchMedicine" FunctionName="MedicareModel.Store.SearchMedicine">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.SearchMedicine_Result">
+                <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SupplyMedicine" FunctionName="MedicareModel.Store.SupplyMedicine" />
           <FunctionImportMapping FunctionImportName="Update_DoctorData" FunctionName="MedicareModel.Store.Update_DoctorData" />
         </EntityContainerMapping>
       </Mapping>
