@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        .header {
+            margin-top: 0;
+            height: 2.5em;
+            margin-bottom: 2em;
+            justify-content: center;
+            padding-inline: 3em;
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
+
+        .footerDesign {
+            text-align: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    
+        <div class="header d-flex justify-content-between">
+            <img src="~/Assets/Logo.png" height="50" alt="">
+
+            <div class="nav-item ms-auto" style ="padding-right:2em">
+                <form action="@Url.Action("Login", "Login")">
+                    <button   type="submit" class="btn btn-success">Login</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer class="footerDesign">
+                <p>© 2023 MediCare Clinic. All rights reserved.</p>
+            </footer>
+        </div>
+
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

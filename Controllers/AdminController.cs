@@ -14,7 +14,7 @@ namespace Clinic_Automation.Controllers
     {
         // GET: Admin
 
-        public ActionResult Admin()
+        public ActionResult Doctor()
         {
             List<DoctorModel> model = new List<DoctorModel>();
             using (MedicareEntities db = new MedicareEntities())
@@ -112,7 +112,7 @@ namespace Clinic_Automation.Controllers
                     }
                 }
 
-                return View("AdminDoctorAdd");
+              
             }
             else
             {
@@ -165,5 +165,149 @@ namespace Clinic_Automation.Controllers
 
 
         }
+        //patient
+        public ActionResult Patient()
+        {
+            List<Patient1> model = new List<Patient1>();
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.patient_details_view();
+                foreach (var item in getdata)
+                {
+                    model.Add(new Patient1
+                    {
+                        Patient_Id = item.Patient_Id,
+                        Patient_Name = item.Patient_Name,
+                        Patient_Email = item.Patient_Email,
+                        Patient_Birthday = item.Patient_Birthday,
+                        Patient_Phone = item.Patient_Phone,
+                        Patient_gender = item.Patient_gender,
+                        Patient_Bloodgrp = item.Patient_Bloodgrp,
+                        Patient_Address = item.Patient_Address,
+                        Patient_Weight = item.Patient_Weight,
+                        Patient_Height = item.Patient_Height,
+                        Patient_Prescription = item.Patient_Prescription
+                    });
+                }
+            }
+
+            return View("AdminPatientView", model);
+        }
+
+
+        public ActionResult AddPatient()
+        {
+
+            return View("AdminPatientAdd");
+
+        }
+
+        public ActionResult EditPatient(int id)
+        {
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.patientById(id).FirstOrDefault();
+                Patient1 model = new Patient1();
+               
+                model.Patient_Id =Convert.ToInt32(id);
+                model.Patient_Name = getdata.Patient_Name;
+                model.Patient_Email = getdata.Patient_Email;
+                model.Patient_Birthday = getdata.Patient_Birthday;
+                model.Patient_Phone = getdata.Patient_Phone;
+                model.Patient_gender = getdata.Patient_gender;
+                model.Patient_Bloodgrp = getdata.Patient_Bloodgrp;
+                model.Patient_Address = getdata.Patient_Address;
+                model.Patient_Weight = getdata.Patient_Weight;
+                model.Patient_Height = getdata.Patient_Height;
+                model.Patient_Prescription = getdata.Patient_Prescription;
+                model.Patient_Username = getdata.Username;
+                model.Patient_Password = getdata.Password;
+
+
+                return View("AdminPatientAdd", model);
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SavePatient(Patient1 model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (model.Patient_Id > 0)
+                {
+                    using (MedicareEntities db = new MedicareEntities())
+                    {
+                        if (model.Patient_Id.HasValue && model.Patient_Id > 0)
+                            db.patient_details_update(model.Patient_Id, model.Patient_Name, model.Patient_Email, model.Patient_Birthday, model.Patient_Phone, model.Patient_gender, model.Patient_Bloodgrp, model.Patient_Address, model.Patient_Weight, model.Patient_Height, model.Patient_Prescription);
+                        ViewBag.Message = "Data Updated successfully";
+
+                        return View("AdminPatientAdd");
+
+                    }
+                }
+                else
+                {
+                    using (MedicareEntities db = new MedicareEntities())
+                    {
+
+
+                        db.Add_LoginData(model.Patient_Username, model.Patient_Password, 1);
+                        db.Database.Connection.Close();
+                        db.Database.Connection.Open();
+                        db.patient_details_insert(model.Patient_Name, model.Patient_Email, model.Patient_Birthday, model.Patient_Phone, model.Patient_gender, model.Patient_Bloodgrp, model.Patient_Address, model.Patient_Weight, model.Patient_Height, model.Patient_Prescription,model.Patient_Username,model.Patient_Password);
+
+
+                        ViewBag.Message = "Data inserted successfully";
+
+                        return View("AdminPatientAdd");
+
+                    }
+                }
+
+
+            }
+            else
+            {
+                return View("AdminPatientAdd", model);
+            }
+
+        }
+
+        public ActionResult DeletePatient(int id)
+        {
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                db.patient_details_delete(id);
+            }
+
+            List<Patient1> model = new List<Patient1>();
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.patient_details_view();
+                foreach (var item in getdata)
+                {
+                    model.Add(new Patient1
+                    {
+                        Patient_Id = item.Patient_Id,
+                        Patient_Name = item.Patient_Name,
+                        Patient_Email = item.Patient_Email,
+                        Patient_Birthday = item.Patient_Birthday,
+                        Patient_Phone = item.Patient_Phone,
+                        Patient_gender = item.Patient_gender,
+                        Patient_Bloodgrp = item.Patient_Bloodgrp,
+                        Patient_Address = item.Patient_Address,
+                        Patient_Weight = item.Patient_Weight,
+                        Patient_Height = item.Patient_Height,
+                        Patient_Prescription = item.Patient_Prescription
+                    });
+                }
+            }
+
+            return View("AdminPatientView", model);
+        }
+
     }
 }

@@ -98,6 +98,8 @@
   <ItemGroup>
     <Content Include="Assets\LoginImage.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\NoData.jpg" />
+    <Content Include="Assets\search.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -160,6 +162,9 @@
     </Compile>
     <Compile Include="Models\Account_list_get.cs" />
     <Compile Include="Models\DoctorModel.cs" />
+    <Compile Include="Models\GetMedicineList_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Get_Account_Type_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
@@ -188,6 +193,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MedicareEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Medicine.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderList.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Patient1.cs" />
+    <Compile Include="Models\patientById_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\patient_details_view_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SearchMedicine_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,6 +252,12 @@
     <Content Include="Views\Admin\AdminDoctorAdd.cshtml" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+    <Content Include="Views\Guest\_Layout.cshtml" />
+    <Content Include="Views\Guest\_Layout2.cshtml" />
+    <Content Include="Views\Supplier\_Layout.cshtml" />
+    <Content Include="Views\Admin\AdminPatientView.cshtml" />
+    <Content Include="Views\Admin\AdminPatientAdd.cshtml" />
+    <Content Include="Views\Doctor\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

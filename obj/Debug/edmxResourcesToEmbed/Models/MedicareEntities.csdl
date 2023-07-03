@@ -1,6 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MedicareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Medicine">
+    <Key>
+      <PropertyRef Name="MedicineID" />
+    </Key>
+    <Property Name="MedicineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="OrderLists" Relationship="Self.FK_OrderList_Medicines" FromRole="Medicines" ToRole="OrderList" />
+  </EntityType>
+  <EntityType Name="OrderList">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MedicineID" Type="Int32" Nullable="false" />
+    <Property Name="MedicineName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="OrderStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK_OrderList_Medicines" FromRole="OrderList" ToRole="Medicines" />
+  </EntityType>
+  <Association Name="FK_OrderList_Medicines">
+    <End Role="Medicines" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicines">
+        <PropertyRef Name="MedicineID" />
+      </Principal>
+      <Dependent Role="OrderList">
+        <PropertyRef Name="MedicineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MedicareEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+    <EntitySet Name="OrderLists" EntityType="Self.OrderList" />
+    <AssociationSet Name="FK_OrderList_Medicines" Association="Self.FK_OrderList_Medicines">
+      <End Role="Medicines" EntitySet="Medicines" />
+      <End Role="OrderList" EntitySet="OrderLists" />
+    </AssociationSet>
     <FunctionImport Name="Add_Doctor">
       <Parameter Name="name" Mode="In" Type="String" />
       <Parameter Name="speciality" Mode="In" Type="String" />
@@ -26,10 +70,53 @@
     <FunctionImport Name="Get_DoctorData_byID" ReturnType="Collection(MedicareModel.Get_DoctorData_byID_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetMedicineList" ReturnType="Collection(MedicareModel.GetMedicineList_Result)" />
     <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel.Login_Check_Result)">
       <Parameter Name="username" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
       <Parameter Name="accid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="patient_details_delete">
+      <Parameter Name="p_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="patient_details_insert">
+      <Parameter Name="p_name" Mode="In" Type="String" />
+      <Parameter Name="p_email" Mode="In" Type="String" />
+      <Parameter Name="p_dob" Mode="In" Type="DateTime" />
+      <Parameter Name="p_phone" Mode="In" Type="String" />
+      <Parameter Name="p_gender" Mode="In" Type="String" />
+      <Parameter Name="p_bloodgrp" Mode="In" Type="String" />
+      <Parameter Name="p_address" Mode="In" Type="String" />
+      <Parameter Name="p_weight" Mode="In" Type="Decimal" />
+      <Parameter Name="p_height" Mode="In" Type="Decimal" />
+      <Parameter Name="p_prescription" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="patient_details_update">
+      <Parameter Name="p_id" Mode="In" Type="Int32" />
+      <Parameter Name="p_name" Mode="In" Type="String" />
+      <Parameter Name="p_email" Mode="In" Type="String" />
+      <Parameter Name="p_dob" Mode="In" Type="DateTime" />
+      <Parameter Name="p_phone" Mode="In" Type="String" />
+      <Parameter Name="p_gender" Mode="In" Type="String" />
+      <Parameter Name="p_bloodgrp" Mode="In" Type="String" />
+      <Parameter Name="p_address" Mode="In" Type="String" />
+      <Parameter Name="p_weight" Mode="In" Type="Decimal" />
+      <Parameter Name="p_height" Mode="In" Type="Decimal" />
+      <Parameter Name="p_prescription" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="patient_details_view" ReturnType="Collection(MedicareModel.patient_details_view_Result)" />
+    <FunctionImport Name="patientById" ReturnType="Collection(MedicareModel.patientById_Result)">
+      <Parameter Name="p_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SearchMedicine" ReturnType="Collection(MedicareModel.SearchMedicine_Result)">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SupplyMedicine">
+      <Parameter Name="medicineID" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+      <Parameter Name="orderId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Update_DoctorData">
       <Parameter Name="name" Mode="In" Type="String" />
@@ -54,7 +141,7 @@
     <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
-    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
@@ -67,7 +154,7 @@
     <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
-    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
@@ -76,11 +163,59 @@
     <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
     <Property Type="Int32" Name="Login_ID" Nullable="true" />
   </ComplexType>
+  <ComplexType Name="GetMedicineList_Result">
+    <Property Type="Int32" Name="MedicineID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Dosage" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="Login_Check_Result">
     <Property Type="Int32" Name="Login_ID" Nullable="false" />
     <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Account_ID" Nullable="true" />
     <Property Type="String" Name="Account_name" Nullable="true" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="patient_details_view_Result">
+    <Property Type="Int32" Name="Patient_Id" Nullable="false" />
+    <Property Type="String" Name="Patient_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_Email" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Patient_Birthday" Nullable="false" />
+    <Property Type="String" Name="Patient_Phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_gender" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_Bloodgrp" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_Address" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Patient_Weight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Patient_Height" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="String" Name="Patient_Prescription" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Login_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="patientById_Result">
+    <Property Type="String" Name="Patient_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_Email" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Patient_Birthday" Nullable="false" />
+    <Property Type="String" Name="Patient_Phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_gender" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_Bloodgrp" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Patient_Address" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Patient_Weight" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Patient_Height" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="String" Name="Patient_Prescription" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SearchMedicine_Result">
+    <Property Type="Int32" Name="MedicineID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Dosage" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
   </ComplexType>
 </Schema>

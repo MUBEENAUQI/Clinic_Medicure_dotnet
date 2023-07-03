@@ -1,6 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MedicareModelStoreContainer" CdmEntityContainer="MedicareEntities">
+    <EntitySetMapping Name="Medicines">
+      <EntityTypeMapping TypeName="MedicareModel.Medicine">
+        <MappingFragment StoreEntitySet="Medicines">
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderLists">
+      <EntityTypeMapping TypeName="MedicareModel.OrderList">
+        <MappingFragment StoreEntitySet="OrderList">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+          <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Add_Doctor" FunctionName="MedicareModel.Store.Add_Doctor" />
     <FunctionImportMapping FunctionImportName="Add_LoginData" FunctionName="MedicareModel.Store.Add_LoginData" />
     <FunctionImportMapping FunctionImportName="DeleteDoctor" FunctionName="MedicareModel.Store.DeleteDoctor" />
@@ -47,6 +73,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetMedicineList" FunctionName="MedicareModel.Store.GetMedicineList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.GetMedicineList_Result">
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Login_Check" FunctionName="MedicareModel.Store.Login_Check">
       <ResultMapping>
         <ComplexTypeMapping TypeName="MedicareModel.Login_Check_Result">
@@ -58,6 +98,60 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="patient_details_delete" FunctionName="MedicareModel.Store.patient_details_delete" />
+    <FunctionImportMapping FunctionImportName="patient_details_insert" FunctionName="MedicareModel.Store.patient_details_insert" />
+    <FunctionImportMapping FunctionImportName="patient_details_update" FunctionName="MedicareModel.Store.patient_details_update" />
+    <FunctionImportMapping FunctionImportName="patient_details_view" FunctionName="MedicareModel.Store.patient_details_view">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.patient_details_view_Result">
+          <ScalarProperty Name="Patient_Id" ColumnName="Patient_Id" />
+          <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+          <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
+          <ScalarProperty Name="Patient_Birthday" ColumnName="Patient_Birthday" />
+          <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+          <ScalarProperty Name="Patient_gender" ColumnName="Patient_gender" />
+          <ScalarProperty Name="Patient_Bloodgrp" ColumnName="Patient_Bloodgrp" />
+          <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+          <ScalarProperty Name="Patient_Weight" ColumnName="Patient_Weight" />
+          <ScalarProperty Name="Patient_Height" ColumnName="Patient_Height" />
+          <ScalarProperty Name="Patient_Prescription" ColumnName="Patient_Prescription" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="patientById" FunctionName="MedicareModel.Store.patientById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.patientById_Result">
+          <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+          <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
+          <ScalarProperty Name="Patient_Birthday" ColumnName="Patient_Birthday" />
+          <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+          <ScalarProperty Name="Patient_gender" ColumnName="Patient_gender" />
+          <ScalarProperty Name="Patient_Bloodgrp" ColumnName="Patient_Bloodgrp" />
+          <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+          <ScalarProperty Name="Patient_Weight" ColumnName="Patient_Weight" />
+          <ScalarProperty Name="Patient_Height" ColumnName="Patient_Height" />
+          <ScalarProperty Name="Patient_Prescription" ColumnName="Patient_Prescription" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SearchMedicine" FunctionName="MedicareModel.Store.SearchMedicine">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.SearchMedicine_Result">
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SupplyMedicine" FunctionName="MedicareModel.Store.SupplyMedicine" />
     <FunctionImportMapping FunctionImportName="Update_DoctorData" FunctionName="MedicareModel.Store.Update_DoctorData" />
   </EntityContainerMapping>
 </Mapping>
