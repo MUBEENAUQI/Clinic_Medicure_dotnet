@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedicareModel1StoreContainer" CdmEntityContainer="MedicareEntities1">
+    <EntitySetMapping Name="Medicines">
+      <EntityTypeMapping TypeName="MedicareModel1.Medicine">
+        <MappingFragment StoreEntitySet="Medicines">
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderLists">
+      <EntityTypeMapping TypeName="MedicareModel1.OrderList">
+        <MappingFragment StoreEntitySet="OrderList">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+          <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Get_Account_Type" FunctionName="MedicareModel1.Store.Get_Account_Type">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel1.Get_Account_Type_Result">
+          <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+          <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Login_Check" FunctionName="MedicareModel1.Store.Login_Check">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel1.Login_Check_Result">
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+          <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SupplyMedicine" FunctionName="MedicareModel1.Store.SupplyMedicine" />
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="MedicareModel1.Message">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="SeenStatus" ColumnName="SeenStatus" />
+          <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Get_Conversation" FunctionName="MedicareModel1.Store.Get_Conversation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel1.Get_Conversation_Result">
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_LoginID_from_username" FunctionName="MedicareModel1.Store.Get_LoginID_from_username" />
+    <FunctionImportMapping FunctionImportName="SendMessage" FunctionName="MedicareModel1.Store.SendMessage" />
+    <FunctionImportMapping FunctionImportName="SetSeenStatus" FunctionName="MedicareModel1.Store.SetSeenStatus" />
+    <FunctionImportMapping FunctionImportName="ListOfSenders" FunctionName="MedicareModel1.Store.ListOfSenders">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel1.ListOfSenders_Result2">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="seenStatus" ColumnName="seenStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

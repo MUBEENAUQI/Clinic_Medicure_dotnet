@@ -117,6 +117,16 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Models\MedicareEntities1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MedicareEntities1.edmx</DependentUpon>
+      <LastGenOutput>MedicareEntities1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MedicareEntities1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MedicareEntities1.edmx</DependentUpon>
+      <LastGenOutput>MedicareEntities1.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Medicare_database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Medicare_database.Context.cs</LastGenOutput>
@@ -141,6 +151,7 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\SalesmanController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -149,12 +160,48 @@
     </Compile>
     <Compile Include="Models\Account_list_get.cs" />
     <Compile Include="Models\Get_Account_Type_Result.cs">
-      <DependentUpon>Medicare_database.tt</DependentUpon>
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Get_Conversation_Result.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders1_Result.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders1_Result1.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders2_Result.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders_Result.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders_Result1.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders_Result2.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogAction.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Login_Check_Result.cs">
-      <DependentUpon>Medicare_database.tt</DependentUpon>
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MedicareEntities1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicareEntities1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MedicareEntities1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MedicareEntities1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicareEntities1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Medicare_database.Context.cs">
       <AutoGen>True</AutoGen>
@@ -172,7 +219,15 @@
       <DependentUpon>Medicare_database.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Medicine.cs">
-      <DependentUpon>Medicare_database.tt</DependentUpon>
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMessage.cs" />
+    <Compile Include="Models\Messaging.cs" />
+    <Compile Include="Models\OrderList.cs">
+      <DependentUpon>MedicareEntities1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -201,9 +256,15 @@
     <Content Include="Models\Medicare_database.edmx.diagram">
       <DependentUpon>Medicare_database.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\MedicareEntities1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MedicareEntities1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MedicareEntities1.edmx.diagram">
+      <DependentUpon>MedicareEntities1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\LoginPage.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -220,6 +281,9 @@
     <Content Include="Views\Guest\GuestMed.cshtml" />
     <Content Include="Views\Admin\_Layout.cshtml" />
     <Content Include="Views\Login\UnauthorizedAccess.cshtml" />
+    <Content Include="Views\Supplier\_Layout.cshtml" />
+    <Content Include="Views\Supplier\Message.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -229,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

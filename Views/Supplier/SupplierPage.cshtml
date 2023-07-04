@@ -1,7 +1,117 @@
-﻿
+﻿@model IEnumerable<Clinic_Automation.Models.OrderList>
 @{
-    ViewBag.Title = "SupplierPage";
+    Layout = "~/Views/Supplier/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Supplier";
 }
 
-<h2>SupplierPage</h2>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+@using (Html.BeginForm("Supplier", "Supplier", FormMethod.Get))
+{
+<div class="flex-container" style="display: flex; align-items: center; justify-content: space-between; padding-inline-end: 1.5em;">
+    <h2>List of Orders</h2>
+    <div class="flex-container" style="display: flex;">
+        <div style="margin-right: 16px;">
+            <a href="@Url.Action("PendingOrders", "Supplier")" class="btn btn-success">Pending Orders</a>
+        </div>
+        <div>
+            <a href="@Url.Action("Supplier", "Supplier")" class="btn btn-success">All Orders</a>
+        </div>
+    </div>
+</div>
+}
+
+<div class="table-container">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>OrderID</th>
+            <th>MedicineID</th>
+            <th>MedicineName</th>
+            <th>Quantity</th>
+            <th>OrderDate</th>
+            <th>OrderStatus</th>
+            <th>Action</th>
+        </tr>
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.OrderID</td>
+                    <td>@item.MedicineID</td>
+                    <td>@item.MedicineName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.OrderDate.ToShortDateString()</td>
+                    @if (@item.OrderStatus)
+                    {
+                        <td>Supplied</td>
+                        <td>
+                            <button type="button" class="btn" disabled >Supply</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Pending</td>
+                        <td>
+                            <a href="@Url.Action("Supply", "Supplier", new { medid = item.MedicineID, quantity = item.Quantity, orderid=item.OrderID })" class="btn btn-success" style="background-color:lightseagreen">Supply</a>
+                        </td>
+
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <td colspan="6">No Data Found</td>
+        }
+    </table>
+</div>
+<div id="message" class="row divspace" style="margin-top:20px;">
+    <div class="col-md-12">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success">
+                @ViewBag.Message
+            </div>
+            
+        }
+    </div>
+</div>
+
+<script>
+    function updateView() {
+        const element = document.getElementById('message');
+        element.remove();
+    }
+    setInterval(updateView, 3000);
+</script>
+
+<style>
+    .header2 {
+        display: flex;
+        width: auto;
+        float: left;
+    }
+
+    .table-container {
+        height: 300px; /* Set a fixed height for the container */
+        overflow: auto; /* Enable scrolling */
+    }
+
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline-end: 1.5em
+    }
+
+    .divspace {
+        padding-top: .3em
+    }
+    
+</style>
 

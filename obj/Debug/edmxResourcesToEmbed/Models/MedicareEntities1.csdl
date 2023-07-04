@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicareModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Medicine">
+    <Key>
+      <PropertyRef Name="MedicineID" />
+    </Key>
+    <Property Name="MedicineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrderLists" Relationship="Self.FK_OrderList_Medicines" FromRole="Medicines" ToRole="OrderList" />
+  </EntityType>
+  <EntityType Name="OrderList">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MedicineID" Type="Int32" Nullable="false" />
+    <Property Name="MedicineName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="OrderStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK_OrderList_Medicines" FromRole="OrderList" ToRole="Medicines" />
+  </EntityType>
+  <Association Name="FK_OrderList_Medicines">
+    <End Role="Medicines" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicines">
+        <PropertyRef Name="MedicineID" />
+      </Principal>
+      <Dependent Role="OrderList">
+        <PropertyRef Name="MedicineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicareEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+    <EntitySet Name="OrderLists" EntityType="Self.OrderList" />
+    <AssociationSet Name="FK_OrderList_Medicines" Association="Self.FK_OrderList_Medicines">
+      <End Role="Medicines" EntitySet="Medicines" />
+      <End Role="OrderList" EntitySet="OrderLists" />
+    </AssociationSet>
+    <FunctionImport Name="Get_Account_Type" ReturnType="Collection(MedicareModel1.Get_Account_Type_Result)" />
+    <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel1.Login_Check_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SupplyMedicine">
+      <Parameter Name="medicineID" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+      <Parameter Name="orderId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Messages" EntityType="MedicareModel1.Message" />
+    <AssociationSet Name="FK_Messages_Messages" Association="MedicareModel1.FK_Messages_Messages">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="Message1" EntitySet="Messages" />
+    </AssociationSet>
+    <FunctionImport Name="Get_Conversation" ReturnType="Collection(MedicareModel1.Get_Conversation_Result)">
+      <Parameter Name="senderId" Mode="In" Type="Int32" />
+      <Parameter Name="receiverId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_LoginID_from_username" ReturnType="Collection(Int32)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SendMessage">
+      <Parameter Name="senderId" Mode="In" Type="Int32" />
+      <Parameter Name="receiverId" Mode="In" Type="Int32" />
+      <Parameter Name="timestamp" Mode="In" Type="DateTime" />
+      <Parameter Name="content" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SetSeenStatus">
+      <Parameter Name="senderId" Mode="In" Type="Int32" />
+      <Parameter Name="receiverId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListOfSenders" ReturnType="Collection(MedicareModel1.ListOfSenders_Result2)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Get_Account_Type_Result">
+    <Property Type="Int32" Name="Account_ID" Nullable="false" />
+    <Property Type="String" Name="Account_name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Login_Check_Result">
+    <Property Type="Int32" Name="Login_ID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Account_ID" Nullable="true" />
+    <Property Type="String" Name="Account_name" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SenderID" Type="Int32" Nullable="false" />
+    <Property Name="ReceiverID" Type="Int32" Nullable="false" />
+    <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MessageContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SeenStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Messages1" Relationship="MedicareModel1.FK_Messages_Messages" FromRole="Message" ToRole="Message1" />
+    <NavigationProperty Name="Message1" Relationship="MedicareModel1.FK_Messages_Messages" FromRole="Message1" ToRole="Message" />
+  </EntityType>
+  <Association Name="FK_Messages_Messages">
+    <End Type="MedicareModel1.Message" Role="Message" Multiplicity="1" />
+    <End Type="MedicareModel1.Message" Role="Message1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageID" />
+      </Principal>
+      <Dependent Role="Message1">
+        <PropertyRef Name="MessageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="ListOfSenders1_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Get_Conversation_Result">
+    <Property Type="Int32" Name="SenderID" Nullable="false" />
+    <Property Type="String" Name="MessageContent" Nullable="false" />
+    <Property Type="DateTime" Name="TimeStamp" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListOfSenders_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListOfSenders1_Result1">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListOfSenders2_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListOfSenders_Result1">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ListOfSenders_Result2">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+  </ComplexType>
+</Schema>

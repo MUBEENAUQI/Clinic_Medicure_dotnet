@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        .header {
+            margin-top: 0;
+            height: 3em;
+            margin-bottom: 2em;
+            justify-content: center;
+            padding-inline: 3em;
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
+
+        .footerDesign {
+            text-align: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 1em;
+        }
+
+            .sidebar ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .sidebar li {
+                margin-bottom: 0.5em;
+            }
+
+            .sidebar a {
+                color: #000000;
+                text-decoration: none;
+            }
+
+                .sidebar a:hover {
+                    color: #0b8fac;
+                }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="header d-flex justify-content-between">
+            <img src="~/Assets/Logo.png" height="50" alt="">
+            @if (Request.IsAuthenticated)
+            {
+                <div class="nav-item ms-auto">
+                    <form action="@Url.Action("Signout", "Admin")" method="post">
+                        <button type="submit" class="btn btn-danger">Sign Out</button>
+                    </form>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="sidebar">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Supplier","Supplier")">Order List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Message","Supplier")">Messages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Doctors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="container body-content">
+                    @RenderBody()
+                    <hr />
+                    <footer class="footerDesign">
+                        <p>© 2023 MediCare Clinic. All rights reserved.</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
