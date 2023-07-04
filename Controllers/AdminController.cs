@@ -241,7 +241,7 @@ namespace Clinic_Automation.Controllers
                     using (MedicareEntities db = new MedicareEntities())
                     {
                         if (model.Patient_Id.HasValue && model.Patient_Id > 0)
-                            db.patient_details_update(model.Patient_Id, model.Patient_Name, model.Patient_Email, model.Patient_Birthday, model.Patient_Phone, model.Patient_gender, model.Patient_Bloodgrp, model.Patient_Address, model.Patient_Weight, model.Patient_Height, model.Patient_Prescription);
+                            db.patient_details_update(model.Patient_Id, model.Patient_Name, model.Patient_Email, model.Patient_Birthday, model.Patient_Phone, model.Patient_gender, model.Patient_Bloodgrp, model.Patient_Address, model.Patient_Weight, model.Patient_Height, model.Patient_Prescription,model.Patient_Username,model.Patient_Password,model.Login_id);
                         ViewBag.Message = "Data Updated successfully";
 
                         return View("AdminPatientAdd");
@@ -309,5 +309,270 @@ namespace Clinic_Automation.Controllers
             return View("AdminPatientView", model);
         }
 
+        //Salesman
+        public ActionResult Salesman()
+        {
+            List<Salesman_Model> model = new List<Salesman_Model>();
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.Salesman_View();
+                foreach (var item in getdata)
+                {
+
+                    model.Add(new Salesman_Model
+                    {
+                        Salesman_id = item.SM_ID,
+                        Salesman_name = item.SM_Name,
+                        Salesman_Phone = item.SM_phone,
+                        Salesman_Email = item.SM_Email,
+                        Salesman_Gender = item.SM_Gender,
+                        Login_id=item.Login_ID
+                       
+                    });
+                }
+            }
+
+            return View("AdminSalesmanView", model);
+        }
+       
+
+
+        public ActionResult AddSalesman()
+        {
+
+            return View("AdminSalesmanAdd");
+
+        }
+
+        public ActionResult EditSalesman(int id)
+        {
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var item = db.Salesman_View_byID(id).FirstOrDefault();
+               Salesman_Model model = new Salesman_Model();
+
+                model.Salesman_id = item.SM_ID;
+                model.Salesman_name = item.SM_Name;
+                model.Salesman_Phone = item.SM_phone;
+                model.Salesman_Email = item.SM_Email;
+                model.Salesman_Gender = item.SM_Gender;
+                model.Login_id = item.Login_ID;
+                model.Salesman_Username = item.Username;
+                model.Salesman_Password = item.Password;
+
+                
+                return View("AdminSalesmanAdd", model);
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveSalesman(Salesman_Model model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (model.Salesman_id > 0)
+                {
+                    using (MedicareEntities db = new MedicareEntities())
+                    {
+                        if (model.Salesman_id.HasValue && model.Salesman_id > 0)
+                            db.Salesman_Update(model.Salesman_name, model.Salesman_Phone, model.Salesman_Email, model.Salesman_Gender, model.Salesman_Username, model.Salesman_Password, model.Login_id);
+                        ViewBag.Message = "Data Updated successfully";
+
+                        return View("AdminSalesmanAdd");
+
+                    }
+                }
+        
+                else
+                {
+                    using (MedicareEntities db = new MedicareEntities())
+                    {
+
+
+                        db.Add_LoginData(model.Salesman_Username, model.Salesman_Password, 4);
+                        db.Database.Connection.Close();
+                        db.Database.Connection.Open();
+                        db.Salesman_Insert(model.Salesman_name,model.Salesman_Email,model.Salesman_Phone,model.Salesman_Gender,model.Salesman_Username,model.Salesman_Password);
+
+	
+                        ViewBag.Message = "Data inserted successfully";
+
+                        return View("AdminSalesmanAdd");
+
+                    }
+                }
+
+
+            }
+            else
+            {
+                return View("AdminSalesmanAdd", model);
+            }
+
+        }
+
+        public ActionResult DeleteSalesman(int id)
+        {
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                db.Salesman_Delete(id);
+            }
+
+            List<Salesman_Model> model = new List<Salesman_Model>();
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.Salesman_View();
+                foreach (var item in getdata)
+                {
+                    model.Add(new Salesman_Model
+                    {
+                        Salesman_id = item.SM_ID,
+                        Salesman_name = item.SM_Name,
+                        Salesman_Phone = item.SM_phone,
+                        Salesman_Email = item.SM_Email,
+                        Salesman_Gender = item.SM_Gender,
+                        Login_id = item.Login_ID
+                    });
+                }
+            }
+
+            return View("AdminSalesmanView", model);
+        }
+
+        //Supplier
+        public ActionResult Supplier()
+        {
+            List<Supplier_Model> model = new List<Supplier_Model>();
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.Supplier_View();
+                foreach (var item in getdata)
+                {
+
+                    model.Add(new Supplier_Model
+                    {
+                        Supplier_id = item.Supplier_id,
+                        Supplier_name = item.Supplier_name,
+                        Supplier_Phone = item.Supplier_phone,
+                        Supplier_Email = item.Supplier_email,
+                        Supplier_Gender = item.Supplier_Gender,
+                        Login_id = item.Login_ID
+
+                    });
+                }
+            }
+
+            return View("AdminSupplierView", model);
+        }
+
+
+
+        public ActionResult AddSupplier()
+        {
+
+            return View("AdminSupplierAdd");
+
+        }
+
+        public ActionResult EditSupplier(int id)
+        {
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var item = db.Supplier_View_byID(id).FirstOrDefault();
+                Supplier_Model model = new Supplier_Model();
+
+                model.Supplier_id = item.Supplier_id;
+                model.Supplier_name = item.Supplier_name;
+                model.Supplier_Phone = item.Supplier_phone;
+                model.Supplier_Email = item.Supplier_email;
+                model.Supplier_Gender = item.Supplier_Gender;
+                model.Login_id = item.Login_ID;
+                model.Supplier_Username = item.Username;
+                model.Supplier_Password = item.Password;
+
+
+                return View("AdminSupplierAdd", model);
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveSupplier(Supplier_Model model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (model.Supplier_id > 0)
+                {
+                    using (MedicareEntities db = new MedicareEntities())
+                    {
+                        if (model.Supplier_id.HasValue && model.Supplier_id > 0)
+                            db.Supplier_Update(model.Supplier_name, model.Supplier_Phone, model.Supplier_Email, model.Supplier_Gender, model.Supplier_Username, model.Supplier_Password, model.Login_id);
+                        ViewBag.Message = "Data Updated successfully";
+
+                        return View("AdminSupplierAdd");
+
+                    }
+                }
+
+                else
+                {
+                    using (MedicareEntities db = new MedicareEntities())
+                    {
+
+
+                        db.Add_LoginData(model.Supplier_Username, model.Supplier_Password, 3);
+                        db.Database.Connection.Close();
+                        db.Database.Connection.Open();
+                        db.Supplier_Insert(model.Supplier_name, model.Supplier_Email, model.Supplier_Phone, model.Supplier_Gender, model.Supplier_Username, model.Supplier_Password);
+
+
+                        ViewBag.Message = "Data inserted successfully";
+
+                        return View("AdminSupplierAdd");
+
+                    }
+                }
+
+
+            }
+            else
+            {
+                return View("AdminSupplierAdd", model);
+            }
+
+        }
+
+        public ActionResult DeleteSupplier(int id)
+        {
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                db.Supplier_Delete(id);
+            }
+
+            List<Supplier_Model> model = new List<Supplier_Model>();
+            using (MedicareEntities db = new MedicareEntities())
+            {
+                var getdata = db.Supplier_View();
+                foreach (var item in getdata)
+                {
+                    model.Add(new Supplier_Model
+                    {
+                        Supplier_id = item.Supplier_id,
+                        Supplier_name = item.Supplier_name,
+                        Supplier_Phone = item.Supplier_phone,
+                        Supplier_Email = item.Supplier_email,
+                        Supplier_Gender = item.Supplier_Gender,
+                        Login_id = item.Login_ID
+                    });
+                }
+            }
+
+            return View("AdminSupplierView", model);
+        }
     }
 }

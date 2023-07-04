@@ -204,7 +204,7 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("patient_details_insert", p_nameParameter, p_emailParameter, p_dobParameter, p_phoneParameter, p_genderParameter, p_bloodgrpParameter, p_addressParameter, p_weightParameter, p_heightParameter, p_prescriptionParameter, usernameParameter, passwordParameter);
         }
     
-        public virtual int patient_details_update(Nullable<int> p_id, string p_name, string p_email, Nullable<System.DateTime> p_dob, string p_phone, string p_gender, string p_bloodgrp, string p_address, Nullable<decimal> p_weight, Nullable<decimal> p_height, string p_prescription)
+        public virtual int patient_details_update(Nullable<int> p_id, string p_name, string p_email, Nullable<System.DateTime> p_dob, string p_phone, string p_gender, string p_bloodgrp, string p_address, Nullable<decimal> p_weight, Nullable<decimal> p_height, string p_prescription, string username, string password, Nullable<int> loginid)
         {
             var p_idParameter = p_id.HasValue ?
                 new ObjectParameter("p_id", p_id) :
@@ -250,7 +250,19 @@ namespace Clinic_Automation.Models
                 new ObjectParameter("p_prescription", p_prescription) :
                 new ObjectParameter("p_prescription", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("patient_details_update", p_idParameter, p_nameParameter, p_emailParameter, p_dobParameter, p_phoneParameter, p_genderParameter, p_bloodgrpParameter, p_addressParameter, p_weightParameter, p_heightParameter, p_prescriptionParameter);
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var loginidParameter = loginid.HasValue ?
+                new ObjectParameter("loginid", loginid) :
+                new ObjectParameter("loginid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("patient_details_update", p_idParameter, p_nameParameter, p_emailParameter, p_dobParameter, p_phoneParameter, p_genderParameter, p_bloodgrpParameter, p_addressParameter, p_weightParameter, p_heightParameter, p_prescriptionParameter, usernameParameter, passwordParameter, loginidParameter);
         }
     
         public virtual ObjectResult<patient_details_view_Result> patient_details_view()
@@ -267,6 +279,91 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<patientById_Result>("patientById", p_idParameter);
         }
     
+        public virtual int Salesman_Delete(Nullable<int> sm_id)
+        {
+            var sm_idParameter = sm_id.HasValue ?
+                new ObjectParameter("sm_id", sm_id) :
+                new ObjectParameter("sm_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Salesman_Delete", sm_idParameter);
+        }
+    
+        public virtual int Salesman_Insert(string sm_name, string sm_email, string sm_phone, string sm_gender, string username, string password)
+        {
+            var sm_nameParameter = sm_name != null ?
+                new ObjectParameter("sm_name", sm_name) :
+                new ObjectParameter("sm_name", typeof(string));
+    
+            var sm_emailParameter = sm_email != null ?
+                new ObjectParameter("sm_email", sm_email) :
+                new ObjectParameter("sm_email", typeof(string));
+    
+            var sm_phoneParameter = sm_phone != null ?
+                new ObjectParameter("sm_phone", sm_phone) :
+                new ObjectParameter("sm_phone", typeof(string));
+    
+            var sm_genderParameter = sm_gender != null ?
+                new ObjectParameter("sm_gender", sm_gender) :
+                new ObjectParameter("sm_gender", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Salesman_Insert", sm_nameParameter, sm_emailParameter, sm_phoneParameter, sm_genderParameter, usernameParameter, passwordParameter);
+        }
+    
+        public virtual int Salesman_Update(string name, string phone, string email, string gender, string username, string password, Nullable<int> loginid)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("phone", phone) :
+                new ObjectParameter("phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("gender", gender) :
+                new ObjectParameter("gender", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var loginidParameter = loginid.HasValue ?
+                new ObjectParameter("loginid", loginid) :
+                new ObjectParameter("loginid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Salesman_Update", nameParameter, phoneParameter, emailParameter, genderParameter, usernameParameter, passwordParameter, loginidParameter);
+        }
+    
+        public virtual ObjectResult<Salesman_View_Result> Salesman_View()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Salesman_View_Result>("Salesman_View");
+        }
+    
+        public virtual ObjectResult<Salesman_View_byID_Result> Salesman_View_byID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Salesman_View_byID_Result>("Salesman_View_byID", idParameter);
+        }
+    
         public virtual ObjectResult<SearchMedicine_Result> SearchMedicine(string name)
         {
             var nameParameter = name != null ?
@@ -274,6 +371,91 @@ namespace Clinic_Automation.Models
                 new ObjectParameter("name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchMedicine_Result>("SearchMedicine", nameParameter);
+        }
+    
+        public virtual int Supplier_Delete(Nullable<int> s_id)
+        {
+            var s_idParameter = s_id.HasValue ?
+                new ObjectParameter("s_id", s_id) :
+                new ObjectParameter("s_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Supplier_Delete", s_idParameter);
+        }
+    
+        public virtual int Supplier_Insert(string sm_name, string sm_email, string sm_phone, string sm_gender, string username, string password)
+        {
+            var sm_nameParameter = sm_name != null ?
+                new ObjectParameter("sm_name", sm_name) :
+                new ObjectParameter("sm_name", typeof(string));
+    
+            var sm_emailParameter = sm_email != null ?
+                new ObjectParameter("sm_email", sm_email) :
+                new ObjectParameter("sm_email", typeof(string));
+    
+            var sm_phoneParameter = sm_phone != null ?
+                new ObjectParameter("sm_phone", sm_phone) :
+                new ObjectParameter("sm_phone", typeof(string));
+    
+            var sm_genderParameter = sm_gender != null ?
+                new ObjectParameter("sm_gender", sm_gender) :
+                new ObjectParameter("sm_gender", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Supplier_Insert", sm_nameParameter, sm_emailParameter, sm_phoneParameter, sm_genderParameter, usernameParameter, passwordParameter);
+        }
+    
+        public virtual int Supplier_Update(string name, string phone, string email, string gender, string username, string password, Nullable<int> loginid)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("phone", phone) :
+                new ObjectParameter("phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("gender", gender) :
+                new ObjectParameter("gender", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var loginidParameter = loginid.HasValue ?
+                new ObjectParameter("loginid", loginid) :
+                new ObjectParameter("loginid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Supplier_Update", nameParameter, phoneParameter, emailParameter, genderParameter, usernameParameter, passwordParameter, loginidParameter);
+        }
+    
+        public virtual ObjectResult<Supplier_View_Result> Supplier_View()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Supplier_View_Result>("Supplier_View");
+        }
+    
+        public virtual ObjectResult<Supplier_View_byID_Result> Supplier_View_byID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Supplier_View_byID_Result>("Supplier_View_byID", idParameter);
         }
     
         public virtual int SupplyMedicine(Nullable<int> medicineID, Nullable<int> quantity, Nullable<int> orderId)

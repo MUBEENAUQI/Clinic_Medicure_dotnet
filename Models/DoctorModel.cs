@@ -42,5 +42,5 @@ namespace Clinic_Automation.Models
         [Required(ErrorMessage = "Please enter the doctor's password.")]
         public string Doctor_Password { get; set; }
 
-    } 
+    }
 }

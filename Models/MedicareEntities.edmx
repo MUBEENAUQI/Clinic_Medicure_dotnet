@@ -101,13 +101,64 @@
           <Parameter Name="p_weight" Type="decimal" Mode="In" />
           <Parameter Name="p_height" Type="decimal" Mode="In" />
           <Parameter Name="p_prescription" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="loginid" Type="int" Mode="In" />
         </Function>
         <Function Name="patient_details_view" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="patientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="Salesman_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sm_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Salesman_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sm_name" Type="varchar" Mode="In" />
+          <Parameter Name="sm_email" Type="varchar" Mode="In" />
+          <Parameter Name="sm_phone" Type="varchar" Mode="In" />
+          <Parameter Name="sm_gender" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Salesman_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="gender" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="loginid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Salesman_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Salesman_View_byID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="SearchMedicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Supplier_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="s_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Supplier_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sm_name" Type="varchar" Mode="In" />
+          <Parameter Name="sm_email" Type="varchar" Mode="In" />
+          <Parameter Name="sm_phone" Type="varchar" Mode="In" />
+          <Parameter Name="sm_gender" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Supplier_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="gender" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="loginid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Supplier_View" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Supplier_View_byID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="SupplyMedicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="medicineID" Type="int" Mode="In" />
@@ -245,13 +296,64 @@
             <Parameter Name="p_weight" Mode="In" Type="Decimal" />
             <Parameter Name="p_height" Mode="In" Type="Decimal" />
             <Parameter Name="p_prescription" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="loginid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="patient_details_view" ReturnType="Collection(MedicareModel.patient_details_view_Result)" />
           <FunctionImport Name="patientById" ReturnType="Collection(MedicareModel.patientById_Result)">
             <Parameter Name="p_id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Salesman_Delete">
+            <Parameter Name="sm_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Salesman_Insert">
+            <Parameter Name="sm_name" Mode="In" Type="String" />
+            <Parameter Name="sm_email" Mode="In" Type="String" />
+            <Parameter Name="sm_phone" Mode="In" Type="String" />
+            <Parameter Name="sm_gender" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Salesman_Update">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="loginid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Salesman_View" ReturnType="Collection(MedicareModel.Salesman_View_Result)" />
+          <FunctionImport Name="Salesman_View_byID" ReturnType="Collection(MedicareModel.Salesman_View_byID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="SearchMedicine" ReturnType="Collection(MedicareModel.SearchMedicine_Result)">
             <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Supplier_Delete">
+            <Parameter Name="s_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Supplier_Insert">
+            <Parameter Name="sm_name" Mode="In" Type="String" />
+            <Parameter Name="sm_email" Mode="In" Type="String" />
+            <Parameter Name="sm_phone" Mode="In" Type="String" />
+            <Parameter Name="sm_gender" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Supplier_Update">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="loginid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Supplier_View" ReturnType="Collection(MedicareModel.Supplier_View_Result)" />
+          <FunctionImport Name="Supplier_View_byID" ReturnType="Collection(MedicareModel.Supplier_View_byID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SupplyMedicine">
             <Parameter Name="medicineID" Mode="In" Type="Int32" />
@@ -348,6 +450,24 @@
           <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="Salesman_View_Result">
+          <Property Type="Int32" Name="SM_ID" Nullable="false" />
+          <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Login_ID" Nullable="false" />
+          <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="Salesman_View_byID_Result">
+          <Property Type="Int32" Name="SM_ID" Nullable="false" />
+          <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="Login_ID" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="SearchMedicine_Result">
           <Property Type="Int32" Name="MedicineID" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
@@ -357,6 +477,24 @@
           <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
           <Property Type="Double" Name="Price" Nullable="true" />
           <Property Type="Int32" Name="Quantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Supplier_View_Result">
+          <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+          <Property Type="String" Name="Supplier_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Login_ID" Nullable="false" />
+          <Property Type="String" Name="Supplier_email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Supplier_View_byID_Result">
+          <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+          <Property Type="String" Name="Supplier_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Login_ID" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -500,6 +638,35 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Salesman_Delete" FunctionName="MedicareModel.Store.Salesman_Delete" />
+          <FunctionImportMapping FunctionImportName="Salesman_Insert" FunctionName="MedicareModel.Store.Salesman_Insert" />
+          <FunctionImportMapping FunctionImportName="Salesman_Update" FunctionName="MedicareModel.Store.Salesman_Update" />
+          <FunctionImportMapping FunctionImportName="Salesman_View" FunctionName="MedicareModel.Store.Salesman_View">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Salesman_View_Result">
+                <ScalarProperty Name="SM_ID" ColumnName="SM_ID" />
+                <ScalarProperty Name="SM_Name" ColumnName="SM_Name" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+                <ScalarProperty Name="SM_Email" ColumnName="SM_Email" />
+                <ScalarProperty Name="SM_phone" ColumnName="SM_phone" />
+                <ScalarProperty Name="SM_Gender" ColumnName="SM_Gender" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Salesman_View_byID" FunctionName="MedicareModel.Store.Salesman_View_byID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Salesman_View_byID_Result">
+                <ScalarProperty Name="SM_ID" ColumnName="SM_ID" />
+                <ScalarProperty Name="SM_Name" ColumnName="SM_Name" />
+                <ScalarProperty Name="SM_Email" ColumnName="SM_Email" />
+                <ScalarProperty Name="SM_phone" ColumnName="SM_phone" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SM_Gender" ColumnName="SM_Gender" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SearchMedicine" FunctionName="MedicareModel.Store.SearchMedicine">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.SearchMedicine_Result">
@@ -511,6 +678,35 @@
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Supplier_Delete" FunctionName="MedicareModel.Store.Supplier_Delete" />
+          <FunctionImportMapping FunctionImportName="Supplier_Insert" FunctionName="MedicareModel.Store.Supplier_Insert" />
+          <FunctionImportMapping FunctionImportName="Supplier_Update" FunctionName="MedicareModel.Store.Supplier_Update" />
+          <FunctionImportMapping FunctionImportName="Supplier_View" FunctionName="MedicareModel.Store.Supplier_View">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Supplier_View_Result">
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+                <ScalarProperty Name="Supplier_email" ColumnName="Supplier_email" />
+                <ScalarProperty Name="Supplier_phone" ColumnName="Supplier_phone" />
+                <ScalarProperty Name="Supplier_Gender" ColumnName="Supplier_Gender" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Supplier_View_byID" FunctionName="MedicareModel.Store.Supplier_View_byID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Supplier_View_byID_Result">
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+                <ScalarProperty Name="Supplier_email" ColumnName="Supplier_email" />
+                <ScalarProperty Name="Supplier_phone" ColumnName="Supplier_phone" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Supplier_Gender" ColumnName="Supplier_Gender" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

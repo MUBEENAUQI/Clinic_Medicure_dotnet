@@ -207,7 +207,21 @@
     <Compile Include="Models\patient_details_view_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Salesman_Model.cs" />
+    <Compile Include="Models\Salesman_View_byID_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Salesman_View_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SearchMedicine_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier_Model.cs" />
+    <Compile Include="Models\Supplier_View_byID_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier_View_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +272,10 @@
     <Content Include="Views\Admin\AdminPatientView.cshtml" />
     <Content Include="Views\Admin\AdminPatientAdd.cshtml" />
     <Content Include="Views\Doctor\_Layout.cshtml" />
+    <Content Include="Views\Admin\AdminSalesmanAdd.cshtml" />
+    <Content Include="Views\Admin\AdminSalesmanView.cshtml" />
+    <Content Include="Views\Admin\AdminSupplierAdd.cshtml" />
+    <Content Include="Views\Admin\AdminSupplierView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

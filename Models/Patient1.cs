@@ -11,6 +11,8 @@ namespace Clinic_Automation.Models
         [Key]
         public int? Patient_Id { get; set; }
         [Required(ErrorMessage = "Please enter name")]
+
+       
         public string Patient_Name { get; set; }
         [Required(ErrorMessage = "Please enter mail-id")]
         [EmailAddress]

@@ -1,0 +1,123 @@
+﻿@model List<Clinic_Automation.Models.Salesman_Model>
+
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    //ViewBag.Title = "View Salesman List";
+}
+<style>
+    .Salesman-card {
+        display: flex;
+        align-items: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .Salesman-card-image {
+        flex: 0 0 120px; /* Adjust the image width as desired */
+        padding: 10px;
+        border: 1px solid #ccc; /* Add border styles */
+        /* Make the border circular */
+        overflow: hidden; /* Hide the overflow if the image exceeds the border */
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-block:1em;
+    }
+
+        .Salesman-card-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .Salesman-card-details {
+        flex: 1;
+        padding: 10px;
+    }
+
+        .Salesman-card-details h5 {
+            margin-top: 0;
+            font-size: 14px; /* Adjust the font size as desired */
+        }
+
+        .Salesman-card-details p {
+            font-size: 12px; /* Adjust the font size for other details */
+        }
+
+    .Salesman-card-actions {
+        flex: 0 0 140px; /* Adjust the width of the actions container as desired */
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 10px;
+    }
+
+        .Salesman-card-actions a {
+            margin-left: 5px; /* Add margin between the buttons */
+        }
+</style>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="flex-container" style="display: flex; align-items: center; justify-content: space-between; padding-inline-end: 1.5em;">
+    <h2>View Salesman List</h2>
+    <div>
+        <a href="@Url.Action("AddSalesman", "Admin")" class="btn btn-success">Add Salesman</a>
+    </div>
+</div>
+@if (Model.Count == 0)
+{
+    <div style="display: flex; align-items: center; justify-content: center; height: 60vh;">
+        <img src="~/Assets/NoData.jpg" style="max-width: 300px; max-height: 400px;" alt="No Data Image">
+    </div>
+}
+else
+{
+    <div style="margin-top: 1em;">
+        @foreach (var Salesman in Model)
+        {
+            <div class="Salesman-card">
+                <div class="Salesman-card-image">
+                    @if (Salesman.Salesman_Gender == "Female")
+                    {
+                        <img src="@Url.Content("~/Assets/FemaleDoc.png")" alt="Salesman Avatar">
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Assets/MaleDoc.jpg")" alt="Salesman Avatar">
+                    }
+                </div>
+                <div class="Salesman-card-details">
+                    <div>
+                        <h4>@Salesman.Salesman_name</h4>
+                        
+                    </div>
+                    <div>
+                      
+                        <strong>Email:</strong> @Salesman.Salesman_Email<br />
+                        <strong>Phone:</strong> @Salesman.Salesman_Phone<br />
+                    </div>
+                </div>
+                <div class="Salesman-card-actions" style="margin-inline-end:1em">
+                    <a href="@Url.Action("EditSalesman", "Admin", new { id = Salesman.Salesman_id })" class="btn btn-outline-warning">Edit</a>
+                    <a href="@Url.Action("DeleteSalesman", "Admin", new { id = Salesman.Salesman_id })" class="btn btn-outline-danger delete-Salesman" data-Salesman-name="@Salesman.Salesman_name">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".delete-Salesman").on("click", function (e) {
+            e.preventDefault();
+
+            var SalesmanName = $(this).data("Salesman-name");
+            if (confirm("Are you sure you want to delete " + model.SalesmanName + "?")) {
+                window.location.href = $(this).attr("href");
+            }
+        });
+    });
+</script>

@@ -93,16 +93,17 @@ else
                 <div class="patient-card-details">
                     <div>
                         <h4>@patient.Patient_Name</h4>
-                        <strong>Blood Group:</strong> @patient.Patient_Bloodgrp<br />
+                        <strong>Blood Group:</strong> @patient.Patient_Bloodgrp
+                        <strong>     Date of Birth:</strong> @(patient.Patient_Birthday?.Date.ToString("dd-MMM-yyyy"))<br />
                         <strong>Address:</strong> @patient.Patient_Address <br />
                         <strong>Prescription:</strong> @patient.Patient_Prescription<br />
                     </div>
                     <div>
-                        <strong>Weight:</strong> @patient.Patient_Weight
-                        <strong>      Height:</strong> @patient.Patient_Height <br />
+                        <strong>Weight:</strong> @patient.Patient_Weight Kg
+                        <strong>      Height:</strong> @patient.Patient_Height Cm <br />
                         <strong>Email:</strong> @patient.Patient_Email 
                         <strong>     Phone:</strong> @patient.Patient_Phone<br />
-                        <strong>Date of Birth:</strong> @(patient.Patient_Birthday?.Date.ToString("dd-MMM-yyyy"))<br />
+                       
 
 
                     </div>

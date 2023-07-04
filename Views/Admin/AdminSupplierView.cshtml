@@ -1,0 +1,124 @@
+﻿@model List<Clinic_Automation.Models.Supplier_Model>
+
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    //ViewBag.Title = "View Supplier List";
+}
+<style>
+    .Supplier-card {
+        display: flex;
+        align-items: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .Supplier-card-image {
+        flex: 0 0 120px; /* Adjust the image width as desired */
+        padding: 10px;
+        border: 1px solid #ccc; /* Add border styles */
+        /* Make the border circular */
+        overflow: hidden; /* Hide the overflow if the image exceeds the border */
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-block: 1em;
+    }
+
+        .Supplier-card-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .Supplier-card-details {
+        flex: 1;
+        padding: 10px;
+    }
+
+        .Supplier-card-details h5 {
+            margin-top: 0;
+            font-size: 14px; /* Adjust the font size as desired */
+        }
+
+        .Supplier-card-details p {
+            font-size: 12px; /* Adjust the font size for other details */
+        }
+
+    .Supplier-card-actions {
+        flex: 0 0 140px; /* Adjust the width of the actions container as desired */
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 10px;
+    }
+
+        .Supplier-card-actions a {
+            margin-left: 5px; /* Add margin between the buttons */
+        }
+</style>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="flex-container" style="display: flex; align-items: center; justify-content: space-between; padding-inline-end: 1.5em;">
+    <h2>View Supplier List</h2>
+    <div>
+        <a href="@Url.Action("AddSupplier", "Admin")" class="btn btn-success">Add Supplier</a>
+    </div>
+</div>
+@if (Model.Count == 0)
+{
+    <div style="display: flex; align-items: center; justify-content: center; height: 60vh;">
+        <img src="~/Assets/NoData.jpg" style="max-width: 300px; max-height: 400px;" alt="No Data Image">
+    </div>
+}
+else
+{
+    <div style="margin-top: 1em;">
+        @foreach (var Supplier in Model)
+        {
+            <div class="Supplier-card">
+                <div class="Supplier-card-image">
+                    @if (Supplier.Supplier_Gender == "Female")
+                    {
+                        <img src="@Url.Content("~/Assets/FemaleDoc.png")" alt="Supplier Avatar">
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Assets/MaleDoc.jpg")" alt="Supplier Avatar">
+                    }
+                </div>
+                <div class="Supplier-card-details">
+                    <div>
+                        <h4>@Supplier.Supplier_name</h4>
+
+                    </div>
+                    <div>
+
+                        <strong>Email:</strong> @Supplier.Supplier_Email<br />
+                        <strong>Phone:</strong> @Supplier.Supplier_Phone<br />
+                    </div>
+                </div>
+                <div class="Supplier-card-actions" style="margin-inline-end:1em">
+                    <a href="@Url.Action("EditSupplier", "Admin", new { id = Supplier.Supplier_id })" class="btn btn-outline-warning">Edit</a>
+                    <a href="@Url.Action("DeleteSupplier", "Admin", new { id = Supplier.Supplier_id })" class="btn btn-outline-danger delete-Supplier" data-Supplier-name="@Supplier.Supplier_name">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".delete-Supplier").on("click", function (e) {
+            e.preventDefault();
+
+            var SupplierName = $(this).data("Supplier-name");
+            if (confirm("Are you sure you want to delete ?")) {
+                window.location.href = $(this).attr("href");
+            }
+        });
+    });
+
+</script>
