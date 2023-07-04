@@ -105,13 +105,64 @@
       <Parameter Name="p_weight" Mode="In" Type="Decimal" />
       <Parameter Name="p_height" Mode="In" Type="Decimal" />
       <Parameter Name="p_prescription" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="loginid" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="patient_details_view" ReturnType="Collection(MedicareModel.patient_details_view_Result)" />
     <FunctionImport Name="patientById" ReturnType="Collection(MedicareModel.patientById_Result)">
       <Parameter Name="p_id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="Salesman_Delete">
+      <Parameter Name="sm_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Salesman_Insert">
+      <Parameter Name="sm_name" Mode="In" Type="String" />
+      <Parameter Name="sm_email" Mode="In" Type="String" />
+      <Parameter Name="sm_phone" Mode="In" Type="String" />
+      <Parameter Name="sm_gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Salesman_Update">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="loginid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Salesman_View" ReturnType="Collection(MedicareModel.Salesman_View_Result)" />
+    <FunctionImport Name="Salesman_View_byID" ReturnType="Collection(MedicareModel.Salesman_View_byID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="SearchMedicine" ReturnType="Collection(MedicareModel.SearchMedicine_Result)">
       <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Supplier_Delete">
+      <Parameter Name="s_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Supplier_Insert">
+      <Parameter Name="sm_name" Mode="In" Type="String" />
+      <Parameter Name="sm_email" Mode="In" Type="String" />
+      <Parameter Name="sm_phone" Mode="In" Type="String" />
+      <Parameter Name="sm_gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Supplier_Update">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="loginid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Supplier_View" ReturnType="Collection(MedicareModel.Supplier_View_Result)" />
+    <FunctionImport Name="Supplier_View_byID" ReturnType="Collection(MedicareModel.Supplier_View_byID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SupplyMedicine">
       <Parameter Name="medicineID" Mode="In" Type="Int32" />
@@ -208,6 +259,24 @@
     <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
   </ComplexType>
+  <ComplexType Name="Salesman_View_Result">
+    <Property Type="Int32" Name="SM_ID" Nullable="false" />
+    <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Login_ID" Nullable="false" />
+    <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="Salesman_View_byID_Result">
+    <Property Type="Int32" Name="SM_ID" Nullable="false" />
+    <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="Login_ID" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="SearchMedicine_Result">
     <Property Type="Int32" Name="MedicineID" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
@@ -217,5 +286,23 @@
     <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
     <Property Type="Double" Name="Price" Nullable="true" />
     <Property Type="Int32" Name="Quantity" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Supplier_View_Result">
+    <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+    <Property Type="String" Name="Supplier_name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Login_ID" Nullable="false" />
+    <Property Type="String" Name="Supplier_email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Supplier_View_byID_Result">
+    <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+    <Property Type="String" Name="Supplier_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Login_ID" Nullable="true" />
   </ComplexType>
 </Schema>

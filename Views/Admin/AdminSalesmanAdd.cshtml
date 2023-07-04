@@ -1,0 +1,102 @@
+﻿@model Clinic_Automation.Models.Salesman_Model
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AdminSalesmanAdd";
+}
+
+
+<style>
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline-end: 1.5em
+    }
+
+    .divspace {
+        padding-top: .3em
+    }
+</style>
+
+<div class="flex-container">
+    <h2>Add Salesman Details</h2>
+    <div>
+        <a href="@Url.Action("Salesman", "Admin")" class="btn btn-success">View Salesman</a>
+    </div>
+
+</div>
+
+<div>
+    @using (Html.BeginForm("SaveSalesman", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(a => a.Salesman_id)
+        @Html.HiddenFor(a => a.Login_id)
+        <div class="row divspace">
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Name</label>
+                @Html.TextBoxFor(a => a.Salesman_name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Salesman_name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Gender</label>
+                <div>
+                    Male: @Html.RadioButtonFor(a => a.Salesman_Gender, "Male")
+                    Female: @Html.RadioButtonFor(a => a.Salesman_Gender, "Female")
+                </div>
+                @Html.ValidationMessageFor(a => a.Salesman_Gender, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="row divspace">
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Email</label>
+                @Html.TextBoxFor(a => a.Salesman_Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Salesman_Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Phone</label>
+                @Html.TextBoxFor(a => a.Salesman_Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Salesman_Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+
+        <div class="row divspace">
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Username</label>
+                @Html.TextBoxFor(a => a.Salesman_Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Salesman_Username, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Password</label>
+                @Html.TextBoxFor(a => a.Salesman_Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Salesman_Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+
+
+
+        <div class="row divspace">
+            <div class="col-md-12">
+                <input type="submit" value="Save" class="btn btn-danger" />
+            </div>
+        </div>
+
+        <div class="row divspace">
+            <div class="col-md-12">
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.Message
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+</div>

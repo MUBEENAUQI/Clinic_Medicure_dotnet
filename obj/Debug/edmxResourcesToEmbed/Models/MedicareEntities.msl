@@ -137,6 +137,35 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Salesman_Delete" FunctionName="MedicareModel.Store.Salesman_Delete" />
+    <FunctionImportMapping FunctionImportName="Salesman_Insert" FunctionName="MedicareModel.Store.Salesman_Insert" />
+    <FunctionImportMapping FunctionImportName="Salesman_Update" FunctionName="MedicareModel.Store.Salesman_Update" />
+    <FunctionImportMapping FunctionImportName="Salesman_View" FunctionName="MedicareModel.Store.Salesman_View">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Salesman_View_Result">
+          <ScalarProperty Name="SM_ID" ColumnName="SM_ID" />
+          <ScalarProperty Name="SM_Name" ColumnName="SM_Name" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+          <ScalarProperty Name="SM_Email" ColumnName="SM_Email" />
+          <ScalarProperty Name="SM_phone" ColumnName="SM_phone" />
+          <ScalarProperty Name="SM_Gender" ColumnName="SM_Gender" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Salesman_View_byID" FunctionName="MedicareModel.Store.Salesman_View_byID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Salesman_View_byID_Result">
+          <ScalarProperty Name="SM_ID" ColumnName="SM_ID" />
+          <ScalarProperty Name="SM_Name" ColumnName="SM_Name" />
+          <ScalarProperty Name="SM_Email" ColumnName="SM_Email" />
+          <ScalarProperty Name="SM_phone" ColumnName="SM_phone" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="SM_Gender" ColumnName="SM_Gender" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SearchMedicine" FunctionName="MedicareModel.Store.SearchMedicine">
       <ResultMapping>
         <ComplexTypeMapping TypeName="MedicareModel.SearchMedicine_Result">
@@ -148,6 +177,35 @@
           <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Supplier_Delete" FunctionName="MedicareModel.Store.Supplier_Delete" />
+    <FunctionImportMapping FunctionImportName="Supplier_Insert" FunctionName="MedicareModel.Store.Supplier_Insert" />
+    <FunctionImportMapping FunctionImportName="Supplier_Update" FunctionName="MedicareModel.Store.Supplier_Update" />
+    <FunctionImportMapping FunctionImportName="Supplier_View" FunctionName="MedicareModel.Store.Supplier_View">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Supplier_View_Result">
+          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+          <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+          <ScalarProperty Name="Supplier_email" ColumnName="Supplier_email" />
+          <ScalarProperty Name="Supplier_phone" ColumnName="Supplier_phone" />
+          <ScalarProperty Name="Supplier_Gender" ColumnName="Supplier_Gender" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Supplier_View_byID" FunctionName="MedicareModel.Store.Supplier_View_byID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Supplier_View_byID_Result">
+          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+          <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+          <ScalarProperty Name="Supplier_email" ColumnName="Supplier_email" />
+          <ScalarProperty Name="Supplier_phone" ColumnName="Supplier_phone" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Supplier_Gender" ColumnName="Supplier_Gender" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
