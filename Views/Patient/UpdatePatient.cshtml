@@ -1,0 +1,106 @@
+﻿@model Clinic_Automation.Models.Patient1
+@{
+    ViewBag.Title = "UpdatePatient";
+    Layout = "~/Views/Patient/_Layout.cshtml";
+}
+
+<h2>Update Patient details</h2>
+
+<style>
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline-end: 1.5em
+    }
+
+    .divspace {
+        padding-top: .3em
+    }
+</style>
+
+<div class="flex-container">
+   
+   
+
+</div>
+
+<div>
+    @using (Html.BeginForm("SavePatient", "Patient", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(a => a.Patient_Id)
+        @Html.HiddenFor(a => a.Login_id)
+        @Html.HiddenFor(a => a.Patient_Name)
+        @Html.HiddenFor(a => a.Patient_Birthday)
+        @Html.HiddenFor(a => a.Patient_Username)
+        @Html.HiddenFor(a => a.Patient_gender)
+        @Html.HiddenFor(a => a.Patient_Prescription)
+        @Html.HiddenFor(a => a.Patient_Bloodgrp)
+        <div class="row divspace">
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Phone Number</label>
+                @Html.TextBoxFor(a => a.Patient_Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Patient_Phone, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Email</label>
+                @Html.TextBoxFor(a => a.Patient_Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Patient_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row divspace">
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Address</label>
+                @Html.TextAreaFor(a => a.Patient_Address, new { @class = "form-control", rows = 4 })  <!-- Increased rows to 4 -->
+                @Html.ValidationMessageFor(a => a.Patient_Address, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Password</label>
+                @Html.TextBoxFor(a => a.Patient_Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Patient_Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row divspace">
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Height</label>
+                @Html.TextBoxFor(a => a.Patient_Height, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Patient_Height, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label style="padding-bottom:12px">Weight</label>
+                @Html.TextBoxFor(a => a.Patient_Weight, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Patient_Weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="row divspace" style="margin-top:2em">
+            <div class="col-md-12">
+                <input type="submit" value="Save" class="btn btn-danger" />
+            </div>
+        </div>
+
+        <div class="row divspace">
+            <div class="col-md-12">
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.Message
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+</div>
+
+

@@ -92,6 +92,39 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Add_LoginData", usernameParameter, passwordParameter, accountidParameter);
         }
     
+        public virtual int Add_Medicines(string name, string manu, string dose, string desc, Nullable<System.DateTime> exp, Nullable<double> price, Nullable<int> quanty)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var manuParameter = manu != null ?
+                new ObjectParameter("manu", manu) :
+                new ObjectParameter("manu", typeof(string));
+    
+            var doseParameter = dose != null ?
+                new ObjectParameter("dose", dose) :
+                new ObjectParameter("dose", typeof(string));
+    
+            var descParameter = desc != null ?
+                new ObjectParameter("desc", desc) :
+                new ObjectParameter("desc", typeof(string));
+    
+            var expParameter = exp.HasValue ?
+                new ObjectParameter("exp", exp) :
+                new ObjectParameter("exp", typeof(System.DateTime));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var quantyParameter = quanty.HasValue ?
+                new ObjectParameter("quanty", quanty) :
+                new ObjectParameter("quanty", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Add_Medicines", nameParameter, manuParameter, doseParameter, descParameter, expParameter, priceParameter, quantyParameter);
+        }
+    
         public virtual int DeleteDoctor(Nullable<int> doctorID)
         {
             var doctorIDParameter = doctorID.HasValue ?
@@ -104,6 +137,19 @@ namespace Clinic_Automation.Models
         public virtual ObjectResult<Get_Account_Type_Result> Get_Account_Type()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Account_Type_Result>("Get_Account_Type");
+        }
+    
+        public virtual ObjectResult<Get_Conversation_Result> Get_Conversation(Nullable<int> senderId, Nullable<int> receiverId)
+        {
+            var senderIdParameter = senderId.HasValue ?
+                new ObjectParameter("senderId", senderId) :
+                new ObjectParameter("senderId", typeof(int));
+    
+            var receiverIdParameter = receiverId.HasValue ?
+                new ObjectParameter("receiverId", receiverId) :
+                new ObjectParameter("receiverId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Conversation_Result>("Get_Conversation", senderIdParameter, receiverIdParameter);
         }
     
         public virtual ObjectResult<Get_DoctorData_Result> Get_DoctorData()
@@ -120,9 +166,36 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_DoctorData_byID_Result>("Get_DoctorData_byID", idParameter);
         }
     
+        public virtual ObjectResult<Get_DoctorData_byLoginID_Result> Get_DoctorData_byLoginID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_DoctorData_byLoginID_Result>("Get_DoctorData_byLoginID", idParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Get_LoginID_from_username(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Get_LoginID_from_username", usernameParameter);
+        }
+    
         public virtual ObjectResult<GetMedicineList_Result> GetMedicineList()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMedicineList_Result>("GetMedicineList");
+        }
+    
+        public virtual ObjectResult<ListOfSenders_Result> ListOfSenders(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListOfSenders_Result>("ListOfSenders", usernameParameter);
         }
     
         public virtual ObjectResult<Login_Check_Result> Login_Check(string username, string password, Nullable<int> accid)
@@ -140,6 +213,19 @@ namespace Clinic_Automation.Models
                 new ObjectParameter("accid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Check_Result>("Login_Check", usernameParameter, passwordParameter, accidParameter);
+        }
+    
+        public virtual int Order_Medicine(Nullable<int> medid, Nullable<int> quantity)
+        {
+            var medidParameter = medid.HasValue ?
+                new ObjectParameter("medid", medid) :
+                new ObjectParameter("medid", typeof(int));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Order_Medicine", medidParameter, quantityParameter);
         }
     
         public virtual int patient_details_delete(Nullable<int> p_id)
@@ -279,6 +365,15 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<patientById_Result>("patientById", p_idParameter);
         }
     
+        public virtual ObjectResult<patientById_Login_Result> patientById_Login(Nullable<int> p_id)
+        {
+            var p_idParameter = p_id.HasValue ?
+                new ObjectParameter("p_id", p_id) :
+                new ObjectParameter("p_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<patientById_Login_Result>("patientById_Login", p_idParameter);
+        }
+    
         public virtual int Salesman_Delete(Nullable<int> sm_id)
         {
             var sm_idParameter = sm_id.HasValue ?
@@ -364,6 +459,15 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Salesman_View_byID_Result>("Salesman_View_byID", idParameter);
         }
     
+        public virtual ObjectResult<Salesman_View_byLoginID_Result> Salesman_View_byLoginID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Salesman_View_byLoginID_Result>("Salesman_View_byLoginID", idParameter);
+        }
+    
         public virtual ObjectResult<SearchMedicine_Result> SearchMedicine(string name)
         {
             var nameParameter = name != null ?
@@ -371,6 +475,40 @@ namespace Clinic_Automation.Models
                 new ObjectParameter("name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchMedicine_Result>("SearchMedicine", nameParameter);
+        }
+    
+        public virtual int SendMessage(Nullable<int> senderId, Nullable<int> receiverId, Nullable<System.DateTime> timestamp, string content)
+        {
+            var senderIdParameter = senderId.HasValue ?
+                new ObjectParameter("senderId", senderId) :
+                new ObjectParameter("senderId", typeof(int));
+    
+            var receiverIdParameter = receiverId.HasValue ?
+                new ObjectParameter("receiverId", receiverId) :
+                new ObjectParameter("receiverId", typeof(int));
+    
+            var timestampParameter = timestamp.HasValue ?
+                new ObjectParameter("timestamp", timestamp) :
+                new ObjectParameter("timestamp", typeof(System.DateTime));
+    
+            var contentParameter = content != null ?
+                new ObjectParameter("content", content) :
+                new ObjectParameter("content", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SendMessage", senderIdParameter, receiverIdParameter, timestampParameter, contentParameter);
+        }
+    
+        public virtual int SetSeenStatus(Nullable<int> senderId, Nullable<int> receiverId)
+        {
+            var senderIdParameter = senderId.HasValue ?
+                new ObjectParameter("senderId", senderId) :
+                new ObjectParameter("senderId", typeof(int));
+    
+            var receiverIdParameter = receiverId.HasValue ?
+                new ObjectParameter("receiverId", receiverId) :
+                new ObjectParameter("receiverId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetSeenStatus", senderIdParameter, receiverIdParameter);
         }
     
         public virtual int Supplier_Delete(Nullable<int> s_id)
@@ -524,138 +662,9 @@ namespace Clinic_Automation.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_DoctorData", nameParameter, specialityParameter, experienceParameter, phoneParameter, emailParameter, qualificationParameter, feesParameter, genderParameter, usernameParameter, passwordParameter, loginidParameter);
         }
     
-        public virtual ObjectResult<Get_Conversation_Result> Get_Conversation(Nullable<int> senderId, Nullable<int> receiverId)
-        {
-            var senderIdParameter = senderId.HasValue ?
-                new ObjectParameter("senderId", senderId) :
-                new ObjectParameter("senderId", typeof(int));
-    
-            var receiverIdParameter = receiverId.HasValue ?
-                new ObjectParameter("receiverId", receiverId) :
-                new ObjectParameter("receiverId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Conversation_Result>("Get_Conversation", senderIdParameter, receiverIdParameter);
-        }
-    
-        public virtual ObjectResult<Get_DoctorData_byLoginID_Result> Get_DoctorData_byLoginID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_DoctorData_byLoginID_Result>("Get_DoctorData_byLoginID", idParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> Get_LoginID_from_username(string username)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Get_LoginID_from_username", usernameParameter);
-        }
-    
-        public virtual ObjectResult<ListOfSenders_Result> ListOfSenders(string username)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListOfSenders_Result>("ListOfSenders", usernameParameter);
-        }
-    
-        public virtual int Order_Medicine(Nullable<int> medid, Nullable<int> quantity)
-        {
-            var medidParameter = medid.HasValue ?
-                new ObjectParameter("medid", medid) :
-                new ObjectParameter("medid", typeof(int));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Order_Medicine", medidParameter, quantityParameter);
-        }
-    
-        public virtual ObjectResult<Salesman_View_byLoginID_Result> Salesman_View_byLoginID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Salesman_View_byLoginID_Result>("Salesman_View_byLoginID", idParameter);
-        }
-    
-        public virtual int SendMessage(Nullable<int> senderId, Nullable<int> receiverId, Nullable<System.DateTime> timestamp, string content)
-        {
-            var senderIdParameter = senderId.HasValue ?
-                new ObjectParameter("senderId", senderId) :
-                new ObjectParameter("senderId", typeof(int));
-    
-            var receiverIdParameter = receiverId.HasValue ?
-                new ObjectParameter("receiverId", receiverId) :
-                new ObjectParameter("receiverId", typeof(int));
-    
-            var timestampParameter = timestamp.HasValue ?
-                new ObjectParameter("timestamp", timestamp) :
-                new ObjectParameter("timestamp", typeof(System.DateTime));
-    
-            var contentParameter = content != null ?
-                new ObjectParameter("content", content) :
-                new ObjectParameter("content", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SendMessage", senderIdParameter, receiverIdParameter, timestampParameter, contentParameter);
-        }
-    
-        public virtual int SetSeenStatus(Nullable<int> senderId, Nullable<int> receiverId)
-        {
-            var senderIdParameter = senderId.HasValue ?
-                new ObjectParameter("senderId", senderId) :
-                new ObjectParameter("senderId", typeof(int));
-    
-            var receiverIdParameter = receiverId.HasValue ?
-                new ObjectParameter("receiverId", receiverId) :
-                new ObjectParameter("receiverId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetSeenStatus", senderIdParameter, receiverIdParameter);
-        }
-    
         public virtual ObjectResult<View_Pending_orders_Result> View_Pending_orders()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<View_Pending_orders_Result>("View_Pending_orders");
-        }
-    
-        public virtual int Add_Medicines(string name, string manu, string dose, string desc, Nullable<System.DateTime> exp, Nullable<double> price, Nullable<int> quanty)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            var manuParameter = manu != null ?
-                new ObjectParameter("manu", manu) :
-                new ObjectParameter("manu", typeof(string));
-    
-            var doseParameter = dose != null ?
-                new ObjectParameter("dose", dose) :
-                new ObjectParameter("dose", typeof(string));
-    
-            var descParameter = desc != null ?
-                new ObjectParameter("desc", desc) :
-                new ObjectParameter("desc", typeof(string));
-    
-            var expParameter = exp.HasValue ?
-                new ObjectParameter("exp", exp) :
-                new ObjectParameter("exp", typeof(System.DateTime));
-    
-            var priceParameter = price.HasValue ?
-                new ObjectParameter("price", price) :
-                new ObjectParameter("price", typeof(double));
-    
-            var quantyParameter = quanty.HasValue ?
-                new ObjectParameter("quanty", quanty) :
-                new ObjectParameter("quanty", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Add_Medicines", nameParameter, manuParameter, doseParameter, descParameter, expParameter, priceParameter, quantyParameter);
         }
     }
 }

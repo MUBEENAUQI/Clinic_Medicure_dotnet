@@ -130,6 +130,9 @@
   <Function Name="patientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="p_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="patientById_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_id" Type="int" Mode="In" />
+  </Function>
   <Function Name="Salesman_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="sm_id" Type="int" Mode="In" />
   </Function>

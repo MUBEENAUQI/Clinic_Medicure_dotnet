@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MedicareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MedicareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Medicines">
           <Key>
             <PropertyRef Name="MedicineID" />
@@ -135,6 +135,9 @@
         <Function Name="patientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="p_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="patientById_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="Salesman_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sm_id" Type="int" Mode="In" />
         </Function>
@@ -226,7 +229,8 @@
             <End Role="OrderList" EntitySet="OrderList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MedicareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -292,22 +296,48 @@
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="accountid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Add_Medicines">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="manu" Mode="In" Type="String" />
+            <Parameter Name="dose" Mode="In" Type="String" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="exp" Mode="In" Type="DateTime" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="quanty" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="DeleteDoctor">
-          <Parameter Name="DoctorID" Mode="In" Type="Int32" />
+            <Parameter Name="DoctorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_Account_Type" ReturnType="Collection(MedicareModel.Get_Account_Type_Result)" />
+          <FunctionImport Name="Get_Conversation" ReturnType="Collection(MedicareModel.Get_Conversation_Result)">
+            <Parameter Name="senderId" Mode="In" Type="Int32" />
+            <Parameter Name="receiverId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Get_DoctorData" ReturnType="Collection(MedicareModel.Get_DoctorData_Result)" />
           <FunctionImport Name="Get_DoctorData_byID" ReturnType="Collection(MedicareModel.Get_DoctorData_byID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_DoctorData_byLoginID" ReturnType="Collection(MedicareModel.Get_DoctorData_byLoginID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_LoginID_from_username" ReturnType="Collection(Int32)">
+            <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetMedicineList" ReturnType="Collection(MedicareModel.GetMedicineList_Result)" />
+          <FunctionImport Name="ListOfSenders" ReturnType="Collection(MedicareModel.ListOfSenders_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel.Login_Check_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="accid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Order_Medicine">
+            <Parameter Name="medid" Mode="In" Type="Int32" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="patient_details_delete">
-          <Parameter Name="p_id" Mode="In" Type="Int32" />
+            <Parameter Name="p_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="patient_details_insert">
             <Parameter Name="p_name" Mode="In" Type="String" />
@@ -341,10 +371,13 @@
           </FunctionImport>
           <FunctionImport Name="patient_details_view" ReturnType="Collection(MedicareModel.patient_details_view_Result)" />
           <FunctionImport Name="patientById" ReturnType="Collection(MedicareModel.patientById_Result)">
-          <Parameter Name="p_id" Mode="In" Type="Int32" />
+            <Parameter Name="p_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="patientById_Login" ReturnType="Collection(MedicareModel.patientById_Login_Result)">
+            <Parameter Name="p_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Salesman_Delete">
-          <Parameter Name="sm_id" Mode="In" Type="Int32" />
+            <Parameter Name="sm_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Salesman_Insert">
             <Parameter Name="sm_name" Mode="In" Type="String" />
@@ -365,13 +398,26 @@
           </FunctionImport>
           <FunctionImport Name="Salesman_View" ReturnType="Collection(MedicareModel.Salesman_View_Result)" />
           <FunctionImport Name="Salesman_View_byID" ReturnType="Collection(MedicareModel.Salesman_View_byID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Salesman_View_byLoginID" ReturnType="Collection(MedicareModel.Salesman_View_byLoginID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SearchMedicine" ReturnType="Collection(MedicareModel.SearchMedicine_Result)">
-          <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SendMessage">
+            <Parameter Name="senderId" Mode="In" Type="Int32" />
+            <Parameter Name="receiverId" Mode="In" Type="Int32" />
+            <Parameter Name="timestamp" Mode="In" Type="DateTime" />
+            <Parameter Name="content" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SetSeenStatus">
+            <Parameter Name="senderId" Mode="In" Type="Int32" />
+            <Parameter Name="receiverId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Supplier_Delete">
-          <Parameter Name="s_id" Mode="In" Type="Int32" />
+            <Parameter Name="s_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Supplier_Insert">
             <Parameter Name="sm_name" Mode="In" Type="String" />
@@ -392,7 +438,7 @@
           </FunctionImport>
           <FunctionImport Name="Supplier_View" ReturnType="Collection(MedicareModel.Supplier_View_Result)" />
           <FunctionImport Name="Supplier_View_byID" ReturnType="Collection(MedicareModel.Supplier_View_byID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SupplyMedicine">
             <Parameter Name="medicineID" Mode="In" Type="Int32" />
@@ -412,50 +458,16 @@
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="loginid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Get_Conversation" ReturnType="Collection(MedicareModel.Get_Conversation_Result)">
-            <Parameter Name="senderId" Mode="In" Type="Int32" />
-            <Parameter Name="receiverId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Get_DoctorData_byLoginID" ReturnType="Collection(MedicareModel.Get_DoctorData_byLoginID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Get_LoginID_from_username" ReturnType="Collection(Int32)">
-          <Parameter Name="username" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="ListOfSenders" ReturnType="Collection(MedicareModel.ListOfSenders_Result)">
-          <Parameter Name="username" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Order_Medicine">
-            <Parameter Name="medid" Mode="In" Type="Int32" />
-            <Parameter Name="quantity" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Salesman_View_byLoginID" ReturnType="Collection(MedicareModel.Salesman_View_byLoginID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SendMessage">
-            <Parameter Name="senderId" Mode="In" Type="Int32" />
-            <Parameter Name="receiverId" Mode="In" Type="Int32" />
-            <Parameter Name="timestamp" Mode="In" Type="DateTime" />
-            <Parameter Name="content" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SetSeenStatus">
-            <Parameter Name="senderId" Mode="In" Type="Int32" />
-            <Parameter Name="receiverId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="View_Pending_orders" ReturnType="Collection(MedicareModel.View_Pending_orders_Result)" />
-          <FunctionImport Name="Add_Medicines">
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="manu" Mode="In" Type="String" />
-            <Parameter Name="dose" Mode="In" Type="String" />
-            <Parameter Name="desc" Mode="In" Type="String" />
-            <Parameter Name="exp" Mode="In" Type="DateTime" />
-            <Parameter Name="price" Mode="In" Type="Double" />
-            <Parameter Name="quanty" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Get_Account_Type_Result">
           <Property Type="Int32" Name="Account_ID" Nullable="false" />
           <Property Type="String" Name="Account_name" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="Get_Conversation_Result">
+          <Property Type="Int32" Name="SenderID" Nullable="false" />
+          <Property Type="String" Name="MessageContent" Nullable="false" />
+          <Property Type="DateTime" Name="TimeStamp" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="Get_DoctorData_Result">
           <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
@@ -484,6 +496,20 @@
           <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
           <Property Type="Int32" Name="Login_ID" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="Get_DoctorData_byLoginID_Result">
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+          <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
+          <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="Login_ID" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="GetMedicineList_Result">
           <Property Type="Int32" Name="MedicineID" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
@@ -494,12 +520,17 @@
           <Property Type="Double" Name="Price" Nullable="true" />
           <Property Type="Int32" Name="Quantity" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ListOfSenders_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="Login_Check_Result">
-          <Property Type="Int32" Name="Login_ID" Nullable="false" />
           <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Account_ID" Nullable="true" />
           <Property Type="String" Name="Account_name" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="Login_ID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="patient_details_view_Result">
           <Property Type="Int32" Name="Patient_Id" Nullable="false" />
@@ -529,6 +560,21 @@
           <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="patientById_Login_Result">
+          <Property Type="Int32" Name="Patient_Id" Nullable="false" />
+          <Property Type="String" Name="Patient_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Email" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Patient_Birthday" Nullable="false" />
+          <Property Type="String" Name="Patient_Phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_gender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Bloodgrp" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Patient_Address" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Patient_Weight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Patient_Height" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Patient_Prescription" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="Salesman_View_Result">
           <Property Type="Int32" Name="SM_ID" Nullable="false" />
           <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
@@ -538,6 +584,16 @@
           <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
         </ComplexType>
         <ComplexType Name="Salesman_View_byID_Result">
+          <Property Type="Int32" Name="SM_ID" Nullable="false" />
+          <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="Login_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Salesman_View_byLoginID_Result">
           <Property Type="Int32" Name="SM_ID" Nullable="false" />
           <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
@@ -573,40 +629,6 @@
           <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Login_ID" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="Get_Conversation_Result">
-          <Property Type="Int32" Name="SenderID" Nullable="false" />
-          <Property Type="String" Name="MessageContent" Nullable="false" />
-          <Property Type="DateTime" Name="TimeStamp" Nullable="false" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="Get_DoctorData_byLoginID_Result">
-          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
-          <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
-          <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
-          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
-          <Property Type="Int32" Name="Login_ID" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ListOfSenders_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="seenStatus" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="Salesman_View_byLoginID_Result">
-          <Property Type="Int32" Name="SM_ID" Nullable="false" />
-          <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
           <Property Type="Int32" Name="Login_ID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="View_Pending_orders_Result">
@@ -651,12 +673,22 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Add_Doctor" FunctionName="MedicareModel.Store.Add_Doctor" />
           <FunctionImportMapping FunctionImportName="Add_LoginData" FunctionName="MedicareModel.Store.Add_LoginData" />
+          <FunctionImportMapping FunctionImportName="Add_Medicines" FunctionName="MedicareModel.Store.Add_Medicines" />
           <FunctionImportMapping FunctionImportName="DeleteDoctor" FunctionName="MedicareModel.Store.DeleteDoctor" />
           <FunctionImportMapping FunctionImportName="Get_Account_Type" FunctionName="MedicareModel.Store.Get_Account_Type">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.Get_Account_Type_Result">
                 <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
                 <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Conversation" FunctionName="MedicareModel.Store.Get_Conversation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Get_Conversation_Result">
+                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -695,6 +727,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_DoctorData_byLoginID" FunctionName="MedicareModel.Store.Get_DoctorData_byLoginID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Get_DoctorData_byLoginID_Result">
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+                <ScalarProperty Name="Doctor_name" ColumnName="Doctor_name" />
+                <ScalarProperty Name="Doctor_Specialty" ColumnName="Doctor_Specialty" />
+                <ScalarProperty Name="Doctor_Experience" ColumnName="Doctor_Experience" />
+                <ScalarProperty Name="Doctor_Email" ColumnName="Doctor_Email" />
+                <ScalarProperty Name="Doctor_Phone" ColumnName="Doctor_Phone" />
+                <ScalarProperty Name="Doctor_Qualification" ColumnName="Doctor_Qualification" />
+                <ScalarProperty Name="Doctor_Fees" ColumnName="Doctor_Fees" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_LoginID_from_username" FunctionName="MedicareModel.Store.Get_LoginID_from_username" />
           <FunctionImportMapping FunctionImportName="GetMedicineList" FunctionName="MedicareModel.Store.GetMedicineList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.GetMedicineList_Result">
@@ -709,17 +760,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListOfSenders" FunctionName="MedicareModel.Store.ListOfSenders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.ListOfSenders_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="seenStatus" ColumnName="seenStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Login_Check" FunctionName="MedicareModel.Store.Login_Check">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.Login_Check_Result">
-                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
                 <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Order_Medicine" FunctionName="MedicareModel.Store.Order_Medicine" />
           <FunctionImportMapping FunctionImportName="patient_details_delete" FunctionName="MedicareModel.Store.patient_details_delete" />
           <FunctionImportMapping FunctionImportName="patient_details_insert" FunctionName="MedicareModel.Store.patient_details_insert" />
           <FunctionImportMapping FunctionImportName="patient_details_update" FunctionName="MedicareModel.Store.patient_details_update" />
@@ -744,6 +805,25 @@
           <FunctionImportMapping FunctionImportName="patientById" FunctionName="MedicareModel.Store.patientById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.patientById_Result">
+                <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+                <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
+                <ScalarProperty Name="Patient_Birthday" ColumnName="Patient_Birthday" />
+                <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+                <ScalarProperty Name="Patient_gender" ColumnName="Patient_gender" />
+                <ScalarProperty Name="Patient_Bloodgrp" ColumnName="Patient_Bloodgrp" />
+                <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+                <ScalarProperty Name="Patient_Weight" ColumnName="Patient_Weight" />
+                <ScalarProperty Name="Patient_Height" ColumnName="Patient_Height" />
+                <ScalarProperty Name="Patient_Prescription" ColumnName="Patient_Prescription" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="patientById_Login" FunctionName="MedicareModel.Store.patientById_Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.patientById_Login_Result">
+                <ScalarProperty Name="Patient_Id" ColumnName="Patient_Id" />
                 <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
                 <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
                 <ScalarProperty Name="Patient_Birthday" ColumnName="Patient_Birthday" />
@@ -788,6 +868,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Salesman_View_byLoginID" FunctionName="MedicareModel.Store.Salesman_View_byLoginID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Salesman_View_byLoginID_Result">
+                <ScalarProperty Name="SM_ID" ColumnName="SM_ID" />
+                <ScalarProperty Name="SM_Name" ColumnName="SM_Name" />
+                <ScalarProperty Name="SM_Email" ColumnName="SM_Email" />
+                <ScalarProperty Name="SM_phone" ColumnName="SM_phone" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SM_Gender" ColumnName="SM_Gender" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SearchMedicine" FunctionName="MedicareModel.Store.SearchMedicine">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.SearchMedicine_Result">
@@ -802,6 +896,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SendMessage" FunctionName="MedicareModel.Store.SendMessage" />
+          <FunctionImportMapping FunctionImportName="SetSeenStatus" FunctionName="MedicareModel.Store.SetSeenStatus" />
           <FunctionImportMapping FunctionImportName="Supplier_Delete" FunctionName="MedicareModel.Store.Supplier_Delete" />
           <FunctionImportMapping FunctionImportName="Supplier_Insert" FunctionName="MedicareModel.Store.Supplier_Insert" />
           <FunctionImportMapping FunctionImportName="Supplier_Update" FunctionName="MedicareModel.Store.Supplier_Update" />
@@ -833,60 +929,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SupplyMedicine" FunctionName="MedicareModel.Store.SupplyMedicine" />
           <FunctionImportMapping FunctionImportName="Update_DoctorData" FunctionName="MedicareModel.Store.Update_DoctorData" />
-          <FunctionImportMapping FunctionImportName="Get_Conversation" FunctionName="MedicareModel.Store.Get_Conversation">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MedicareModel.Get_Conversation_Result">
-                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
-                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
-                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Get_DoctorData_byLoginID" FunctionName="MedicareModel.Store.Get_DoctorData_byLoginID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MedicareModel.Get_DoctorData_byLoginID_Result">
-                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
-                <ScalarProperty Name="Doctor_name" ColumnName="Doctor_name" />
-                <ScalarProperty Name="Doctor_Specialty" ColumnName="Doctor_Specialty" />
-                <ScalarProperty Name="Doctor_Experience" ColumnName="Doctor_Experience" />
-                <ScalarProperty Name="Doctor_Email" ColumnName="Doctor_Email" />
-                <ScalarProperty Name="Doctor_Phone" ColumnName="Doctor_Phone" />
-                <ScalarProperty Name="Doctor_Qualification" ColumnName="Doctor_Qualification" />
-                <ScalarProperty Name="Doctor_Fees" ColumnName="Doctor_Fees" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Get_LoginID_from_username" FunctionName="MedicareModel.Store.Get_LoginID_from_username" />
-          <FunctionImportMapping FunctionImportName="ListOfSenders" FunctionName="MedicareModel.Store.ListOfSenders">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MedicareModel.ListOfSenders_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="seenStatus" ColumnName="seenStatus" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Order_Medicine" FunctionName="MedicareModel.Store.Order_Medicine" />
-          <FunctionImportMapping FunctionImportName="Salesman_View_byLoginID" FunctionName="MedicareModel.Store.Salesman_View_byLoginID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MedicareModel.Salesman_View_byLoginID_Result">
-                <ScalarProperty Name="SM_ID" ColumnName="SM_ID" />
-                <ScalarProperty Name="SM_Name" ColumnName="SM_Name" />
-                <ScalarProperty Name="SM_Email" ColumnName="SM_Email" />
-                <ScalarProperty Name="SM_phone" ColumnName="SM_phone" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="SM_Gender" ColumnName="SM_Gender" />
-                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SendMessage" FunctionName="MedicareModel.Store.SendMessage" />
-          <FunctionImportMapping FunctionImportName="SetSeenStatus" FunctionName="MedicareModel.Store.SetSeenStatus" />
           <FunctionImportMapping FunctionImportName="View_Pending_orders" FunctionName="MedicareModel.Store.View_Pending_orders">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MedicareModel.View_Pending_orders_Result">
@@ -899,7 +941,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Add_Medicines" FunctionName="MedicareModel.Store.Add_Medicines" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
