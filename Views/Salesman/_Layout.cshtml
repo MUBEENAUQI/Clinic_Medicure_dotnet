@@ -72,25 +72,21 @@
                 <div class="sidebar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Doctor","Doctor")">Profile</a>
+                            <a class="nav-link active" href="@Url.Action("Salesman","Salesman")">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Purchaseorder","Salesman")">Purchase order</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("ViewPendingOrders","Salesman")">View Pending orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("GuestMed","Salesman")">View Medicines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Salesman","Salesman")">Messages</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Patient","Doctor")">Patients</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("NewMed","Doctor")">Add Medicines</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("GuestMed","Doctor")">View Medicines</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Purchaseorder","Doctor")">Purchase Order</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("ViewPendingOrders","Doctor")">View Pending Orders</a>
-                        </li>
 
 
                     </ul>
@@ -115,11 +111,14 @@
         $(document).ready(function () {
             var currentUrl = window.location.href;
             $(".sidebar a").each(function () {
-                if (currentUrl.indexOf($(this).attr("href")) > -1) {
+                var href = $(this).attr("href");
+                if (currentUrl.indexOf(href) > -1) {
                     $(this).closest("li").addClass("active");
+                    $(this).closest("li").find("a").addClass("active");
                 }
             });
         });
     </script>
+
 </body>
 </html>

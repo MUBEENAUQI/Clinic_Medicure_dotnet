@@ -1,0 +1,83 @@
+﻿@model Clinic_Automation.Models.Salesman_Model
+
+@{
+    ViewBag.Title = "SalesmanProfile";
+    Layout = "~/Views/Salesman/_Layout.cshtml";
+}
+
+<style>
+    .profile-container {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        
+        margin-bottom: 10px;
+    }
+
+    strong {
+        color: #0b8fac;
+    }
+
+    p {
+        color: #333;
+        margin: 0;
+    }
+
+    /* Add any additional styling as needed */
+</style>
+
+<h2>Your Profile</h2>
+
+<div class="profile-container">
+    <div class="profile-image">
+        @if (Model.Salesman_Gender == "Female")
+        {
+            <img src="@Url.Content("~/Assets/FemaleSaleman.jpg")" alt="Salesman Avatar">
+        }
+        else
+        {
+            <img src="@Url.Content("~/Assets/MaleSaleman.jpg")" alt="Salesman Avatar">
+        }
+    </div>
+    <div class="profile-details" style="margin-left:2em;">
+        <h3>Personal Information</h3>
+        <p><strong>Salesman ID:</strong> @Model.Salesman_id</p>
+        <p><strong>Name:</strong> @Model.Salesman_name</p>
+        <p><strong>Phone:</strong> @Model.Salesman_Phone</p>
+        <p><strong>Email:</strong> @Model.Salesman_Email</p>
+        <p><strong>Gender:</strong> @Model.Salesman_Gender</p>
+    </div>
+    <div class="login-details">
+        <h3>Login Information</h3>
+        <p><strong>Login ID:</strong> @Model.Login_id</p>
+        <p><strong>Username:</strong> @Model.Salesman_Username</p>
+        <p><strong>Password:</strong> @Model.Salesman_Password</p>
+    </div>
+</div>
+<div style="height:10em"></div>

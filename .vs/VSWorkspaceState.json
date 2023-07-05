@@ -3,9 +3,8 @@
     "",
     "\\Controllers",
     "\\Views",
-    "\\Views\\Admin",
     "\\Views\\Doctor"
   ],
-  "SelectedNode": "\\Controllers\\AdminController.cs",
+  "SelectedNode": "\\Controllers\\SalesmanController.cs",
   "PreviewInSolutionExplorer": false
 }

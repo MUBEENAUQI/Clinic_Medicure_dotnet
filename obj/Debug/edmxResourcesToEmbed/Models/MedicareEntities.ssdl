@@ -53,19 +53,45 @@
     <Parameter Name="password" Type="varchar" Mode="In" />
     <Parameter Name="accountid" Type="int" Mode="In" />
   </Function>
+  <Function Name="Add_Medicines" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="manu" Type="varchar" Mode="In" />
+    <Parameter Name="dose" Type="varchar" Mode="In" />
+    <Parameter Name="desc" Type="varchar(max)" Mode="In" />
+    <Parameter Name="exp" Type="date" Mode="In" />
+    <Parameter Name="price" Type="float" Mode="In" />
+    <Parameter Name="quanty" Type="int" Mode="In" />
+  </Function>
   <Function Name="DeleteDoctor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DoctorID" Type="int" Mode="In" />
   </Function>
   <Function Name="Get_Account_Type" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Get_Conversation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="senderId" Type="int" Mode="In" />
+    <Parameter Name="receiverId" Type="int" Mode="In" />
+  </Function>
   <Function Name="Get_DoctorData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Get_DoctorData_byID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="Get_DoctorData_byLoginID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_LoginID_from_username" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="GetMedicineList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListOfSenders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="Login_Check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="username" Type="varchar" Mode="In" />
     <Parameter Name="password" Type="varchar" Mode="In" />
     <Parameter Name="accid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Order_Medicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="medid" Type="int" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
   </Function>
   <Function Name="patient_details_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="p_id" Type="int" Mode="In" />
@@ -128,8 +154,21 @@
   <Function Name="Salesman_View_byID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="Salesman_View_byLoginID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="SearchMedicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SendMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="senderId" Type="int" Mode="In" />
+    <Parameter Name="receiverId" Type="int" Mode="In" />
+    <Parameter Name="timestamp" Type="datetime" Mode="In" />
+    <Parameter Name="content" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="SetSeenStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="senderId" Type="int" Mode="In" />
+    <Parameter Name="receiverId" Type="int" Mode="In" />
   </Function>
   <Function Name="Supplier_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="s_id" Type="int" Mode="In" />
@@ -173,6 +212,7 @@
     <Parameter Name="password" Type="varchar" Mode="In" />
     <Parameter Name="loginid" Type="int" Mode="In" />
   </Function>
+  <Function Name="View_Pending_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="MedicareModelStoreContainer">
     <EntitySet Name="Medicines" EntityType="Self.Medicines" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderList" EntityType="Self.OrderList" Schema="dbo" store:Type="Tables" />

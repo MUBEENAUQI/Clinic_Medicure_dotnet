@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Clinic_Automation.Models.Medicine>
+
+@{
+    ViewBag.Title = "ViewMedicine";
+    Layout = "~/Views/Doctor/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("GuestMed", "Doctor", FormMethod.Get))
+{
+    <div>
+        <h2 class="header2">List of Medicines</h2>
+        <div class="search-box">
+            <img src="~/Assets/search.png" class="input-icon" />
+            @Html.TextBox("searching", null, new { placeholder = "Enter Medicine Name..." })<input type="submit" value="Search" />
+        </div>
+    </div>
+}
+<div class="table-container">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>MedicineID</th>
+            <th>Name</th>
+            <th>Manufacturer</th>
+            <th>Dosage</th>
+            <th>Desciption</th>
+            <th class="fixed-width">Expiry Date</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MedicineID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Manufacturer</td>
+                    <td>@item.Dosage</td>
+                    <td>@item.Description</td>
+                    <td>@item.ExpiryDate</td>
+                    <td>&#8377;@item.Price</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <td colspan="6">No Data Found</td>
+        }
+    </table>
+</div>
+<style>
+    .header2 {
+        display: flex;
+        width: auto;
+        float: left;
+    }
+
+    .table-container {
+        height: 300px; /* Set a fixed height for the container */
+        overflow: auto; /* Enable scrolling */
+    }
+
+    .fixed-width {
+        width: 110px; /* Set the desired width for the column */
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+        background-color: #F2F2F2;
+        border-radius: 4px;
+        margin-left: auto;
+        margin-bottom: 20px;
+    }
+
+        .search-box input[type="text"] {
+            flex: 1;
+            border: none;
+            padding: 4px;
+            background-color: transparent;
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #EAEAEA;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .search-box i {
+            margin-right: 4px;
+        }
+
+    .input-icon {
+        position: relative;
+        top: 9px;
+        transform: translateY(-50%);
+        width: 17px;
+        height: 17px;
+    }
+</style>
+
