@@ -1,0 +1,87 @@
+﻿@model Clinic_Automation.Models.Patient1
+
+@{
+    ViewBag.Title = "PatientProfile";
+    Layout = "~/Views/Patient/_Layout.cshtml";
+}
+
+<style>
+    .profile-container {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
+
+    strong {
+        color: #0b8fac;
+    }
+
+    p {
+        color: #333;
+        margin: 0;
+    }
+
+    /* Add any additional styling as needed */
+</style>
+
+<h2>Your Profile</h2>
+
+<div class="profile-container">
+    <div class="profile-image">
+        @if (Model.Patient_gender == "Female")
+        {
+            <img src="@Url.Content("~/Assets/FemaleSaleman.jpg")" alt="Salesman Avatar">
+        }
+        else
+        {
+            <img src="@Url.Content("~/Assets/MaleSaleman.jpg")" alt="Salesman Avatar">
+        }
+    </div>
+    <div class="profile-details" style="margin-left:3em;">
+        <h3>Personal Information</h3>
+        <p><strong>Patient ID:</strong> @Model.Patient_Id</p>
+        <p><strong>Name:</strong> @Model.Patient_Name</p>
+        <p><strong>Email:</strong> @Model.Patient_Email</p>
+        <p><strong>Birthday:</strong> @Model.Patient_Birthday</p>
+        <p><strong>Phone:</strong> @Model.Patient_Phone</p>
+        <p><strong>Gender:</strong> @Model.Patient_gender</p>
+        <p><strong>Blood Group:</strong> @Model.Patient_Bloodgrp</p>
+        <p><strong>Address:</strong> @Model.Patient_Address</p>
+        <p><strong>Weight:</strong> @Model.Patient_Weight</p>
+        <p><strong>Height:</strong> @Model.Patient_Height</p>
+        <p><strong>Prescription:</strong> @Model.Patient_Prescription</p>
+    </div>
+    <div class="login-details" style="margin-left: 2em;">
+        <h3>Login Information</h3>
+        <p><strong>Login ID:</strong> @Model.Login_id</p>
+        <p><strong>Username:</strong> @Model.Patient_Username</p>
+        <p><strong>Password:</strong> @Model.Patient_Password</p>
+    </div>
+</div>

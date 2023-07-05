@@ -212,6 +212,9 @@
     </Compile>
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\Patient1.cs" />
+    <Compile Include="Models\patientById_Login_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\patientById_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
@@ -271,7 +274,6 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Views\Patient\PatientPage.cshtml" />
     <Content Include="Views\Doctor\DoctorPage.cshtml" />
     <Content Include="Views\Admin\AdminDoctorView.cshtml" />
     <Content Include="Views\Supplier\SupplierPage.cshtml" />
@@ -300,6 +302,9 @@
     <Content Include="Views\Doctor\DoctorPurchaseAdd.cshtml" />
     <Content Include="Views\Doctor\ViewMedicine.cshtml" />
     <Content Include="Views\Doctor\ViewPendingOrders.cshtml" />
+    <Content Include="Views\Patient\PatientProfile.cshtml" />
+    <Content Include="Views\Patient\_Layout.cshtml" />
+    <Content Include="Views\Patient\UpdatePatient.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

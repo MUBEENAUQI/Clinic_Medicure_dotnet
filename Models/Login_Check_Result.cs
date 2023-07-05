@@ -13,10 +13,10 @@ namespace Clinic_Automation.Models
     
     public partial class Login_Check_Result
     {
-        public int Login_ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public Nullable<int> Account_ID { get; set; }
         public string Account_name { get; set; }
+        public int Login_ID { get; set; }
     }
 }
