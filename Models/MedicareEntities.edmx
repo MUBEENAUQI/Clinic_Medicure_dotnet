@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MedicareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MedicareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Medicines">
           <Key>
             <PropertyRef Name="MedicineID" />
@@ -84,6 +84,9 @@
         </Function>
         <Function Name="Get_LoginID_from_username" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get_SupplierDataByLoginID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="GetMedicineList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListOfSenders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -229,8 +232,7 @@
             <End Role="OrderList" EntitySet="OrderList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MedicareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -306,7 +308,7 @@
             <Parameter Name="quanty" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteDoctor">
-            <Parameter Name="DoctorID" Mode="In" Type="Int32" />
+          <Parameter Name="DoctorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_Account_Type" ReturnType="Collection(MedicareModel.Get_Account_Type_Result)" />
           <FunctionImport Name="Get_Conversation" ReturnType="Collection(MedicareModel.Get_Conversation_Result)">
@@ -315,17 +317,17 @@
           </FunctionImport>
           <FunctionImport Name="Get_DoctorData" ReturnType="Collection(MedicareModel.Get_DoctorData_Result)" />
           <FunctionImport Name="Get_DoctorData_byID" ReturnType="Collection(MedicareModel.Get_DoctorData_byID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_DoctorData_byLoginID" ReturnType="Collection(MedicareModel.Get_DoctorData_byLoginID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_LoginID_from_username" ReturnType="Collection(Int32)">
-            <Parameter Name="username" Mode="In" Type="String" />
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetMedicineList" ReturnType="Collection(MedicareModel.GetMedicineList_Result)" />
           <FunctionImport Name="ListOfSenders" ReturnType="Collection(MedicareModel.ListOfSenders_Result)">
-            <Parameter Name="username" Mode="In" Type="String" />
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Login_Check" ReturnType="Collection(MedicareModel.Login_Check_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -337,7 +339,7 @@
             <Parameter Name="quantity" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="patient_details_delete">
-            <Parameter Name="p_id" Mode="In" Type="Int32" />
+          <Parameter Name="p_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="patient_details_insert">
             <Parameter Name="p_name" Mode="In" Type="String" />
@@ -371,13 +373,13 @@
           </FunctionImport>
           <FunctionImport Name="patient_details_view" ReturnType="Collection(MedicareModel.patient_details_view_Result)" />
           <FunctionImport Name="patientById" ReturnType="Collection(MedicareModel.patientById_Result)">
-            <Parameter Name="p_id" Mode="In" Type="Int32" />
+          <Parameter Name="p_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="patientById_Login" ReturnType="Collection(MedicareModel.patientById_Login_Result)">
-            <Parameter Name="p_id" Mode="In" Type="Int32" />
+          <Parameter Name="p_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Salesman_Delete">
-            <Parameter Name="sm_id" Mode="In" Type="Int32" />
+          <Parameter Name="sm_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Salesman_Insert">
             <Parameter Name="sm_name" Mode="In" Type="String" />
@@ -398,13 +400,13 @@
           </FunctionImport>
           <FunctionImport Name="Salesman_View" ReturnType="Collection(MedicareModel.Salesman_View_Result)" />
           <FunctionImport Name="Salesman_View_byID" ReturnType="Collection(MedicareModel.Salesman_View_byID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Salesman_View_byLoginID" ReturnType="Collection(MedicareModel.Salesman_View_byLoginID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SearchMedicine" ReturnType="Collection(MedicareModel.SearchMedicine_Result)">
-            <Parameter Name="name" Mode="In" Type="String" />
+          <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SendMessage">
             <Parameter Name="senderId" Mode="In" Type="Int32" />
@@ -417,7 +419,7 @@
             <Parameter Name="receiverId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Supplier_Delete">
-            <Parameter Name="s_id" Mode="In" Type="Int32" />
+          <Parameter Name="s_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Supplier_Insert">
             <Parameter Name="sm_name" Mode="In" Type="String" />
@@ -438,7 +440,7 @@
           </FunctionImport>
           <FunctionImport Name="Supplier_View" ReturnType="Collection(MedicareModel.Supplier_View_Result)" />
           <FunctionImport Name="Supplier_View_byID" ReturnType="Collection(MedicareModel.Supplier_View_byID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SupplyMedicine">
             <Parameter Name="medicineID" Mode="In" Type="Int32" />
@@ -459,6 +461,9 @@
             <Parameter Name="loginid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="View_Pending_orders" ReturnType="Collection(MedicareModel.View_Pending_orders_Result)" />
+          <FunctionImport Name="Get_SupplierDataByLoginID" ReturnType="Collection(MedicareModel.Get_SupplierDataByLoginID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Get_Account_Type_Result">
           <Property Type="Int32" Name="Account_ID" Nullable="false" />
@@ -638,6 +643,16 @@
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="DateTime" Name="OrderDate" Nullable="false" />
           <Property Type="Boolean" Name="OrderStatus" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Get_SupplierDataByLoginID_Result">
+          <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+          <Property Type="String" Name="Supplier_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Login_ID" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -938,6 +953,20 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_SupplierDataByLoginID" FunctionName="MedicareModel.Store.Get_SupplierDataByLoginID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MedicareModel.Get_SupplierDataByLoginID_Result">
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+                <ScalarProperty Name="Supplier_email" ColumnName="Supplier_email" />
+                <ScalarProperty Name="Supplier_phone" ColumnName="Supplier_phone" />
+                <ScalarProperty Name="Supplier_Gender" ColumnName="Supplier_Gender" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
