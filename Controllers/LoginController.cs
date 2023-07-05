@@ -30,6 +30,7 @@ namespace Clinic_Automation.Controllers
                         var getdata = db.Login_Check(model.User_name, model.Password,model.Account_id).FirstOrDefault();
                         if (getdata != null)
                         {
+                            //var loginids = Convert.ToInt32(getdata.Login_ID);
                             FormsAuthentication.SetAuthCookie(model.User_name, true);
                             var ticket = new FormsAuthenticationTicket(1, model.User_name, DateTime.Now, DateTime.Now.AddHours(1), true, model.User_name);
                             string encryptTicket = FormsAuthentication.Encrypt(ticket);
@@ -47,7 +48,8 @@ namespace Clinic_Automation.Controllers
                                 }
                                 else
                                 {
-                                    return RedirectToAction("Doctor", "Doctor");
+                                Session["LoginId"] = getdata.Login_ID;
+                                return RedirectToAction("Doctor", "Doctor");
                                 }
                             }
                             else if (model.Account_id == 3)
@@ -56,7 +58,8 @@ namespace Clinic_Automation.Controllers
                             }
                             else if (model.Account_id == 4)
                             {
-                                return RedirectToAction("Salesman", "Salesman");
+                            Session["LoginId"] = getdata.Login_ID;
+                            return RedirectToAction("Salesman", "Salesman");
                             }
                             else
                             {

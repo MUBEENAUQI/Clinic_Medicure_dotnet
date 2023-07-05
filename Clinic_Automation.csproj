@@ -168,10 +168,19 @@
     <Compile Include="Models\Get_Account_Type_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Get_Conversation_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Get_DoctorData_byID_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Get_DoctorData_byLoginID_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Get_DoctorData_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListOfSenders_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogAction.cs" />
@@ -197,9 +206,11 @@
     <Compile Include="Models\Medicine.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MedicineModel.cs" />
     <Compile Include="Models\OrderList.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\Patient1.cs" />
     <Compile Include="Models\patientById_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
@@ -209,6 +220,9 @@
     </Compile>
     <Compile Include="Models\Salesman_Model.cs" />
     <Compile Include="Models\Salesman_View_byID_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Salesman_View_byLoginID_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Salesman_View_Result.cs">
@@ -222,6 +236,9 @@
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier_View_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Pending_orders_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -276,6 +293,13 @@
     <Content Include="Views\Admin\AdminSalesmanView.cshtml" />
     <Content Include="Views\Admin\AdminSupplierAdd.cshtml" />
     <Content Include="Views\Admin\AdminSupplierView.cshtml" />
+    <Content Include="Views\Doctor\AddNewMedicine.cshtml" />
+    <Content Include="Views\Doctor\DoctorPatientAdd.cshtml" />
+    <Content Include="Views\Doctor\DoctorPatientView.cshtml" />
+    <Content Include="Views\Doctor\DoctorProfile.cshtml" />
+    <Content Include="Views\Doctor\DoctorPurchaseAdd.cshtml" />
+    <Content Include="Views\Doctor\ViewMedicine.cshtml" />
+    <Content Include="Views\Doctor\ViewPendingOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

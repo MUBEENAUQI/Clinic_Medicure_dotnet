@@ -34,13 +34,8 @@ namespace Clinic_Automation.Controllers
         }
         public ActionResult Message()
         {
-            
+
             return View("Message");
         }
     }
 }
-
-
-
-
-

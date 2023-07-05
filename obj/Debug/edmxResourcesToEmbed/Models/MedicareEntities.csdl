@@ -182,6 +182,46 @@
       <Parameter Name="password" Mode="In" Type="String" />
       <Parameter Name="loginid" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="Get_Conversation" ReturnType="Collection(MedicareModel.Get_Conversation_Result)">
+      <Parameter Name="senderId" Mode="In" Type="Int32" />
+      <Parameter Name="receiverId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_DoctorData_byLoginID" ReturnType="Collection(MedicareModel.Get_DoctorData_byLoginID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_LoginID_from_username" ReturnType="Collection(Int32)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListOfSenders" ReturnType="Collection(MedicareModel.ListOfSenders_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Order_Medicine">
+      <Parameter Name="medid" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Salesman_View_byLoginID" ReturnType="Collection(MedicareModel.Salesman_View_byLoginID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SendMessage">
+      <Parameter Name="senderId" Mode="In" Type="Int32" />
+      <Parameter Name="receiverId" Mode="In" Type="Int32" />
+      <Parameter Name="timestamp" Mode="In" Type="DateTime" />
+      <Parameter Name="content" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SetSeenStatus">
+      <Parameter Name="senderId" Mode="In" Type="Int32" />
+      <Parameter Name="receiverId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="View_Pending_orders" ReturnType="Collection(MedicareModel.View_Pending_orders_Result)" />
+    <FunctionImport Name="Add_Medicines">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="manu" Mode="In" Type="String" />
+      <Parameter Name="dose" Mode="In" Type="String" />
+      <Parameter Name="desc" Mode="In" Type="String" />
+      <Parameter Name="exp" Mode="In" Type="DateTime" />
+      <Parameter Name="price" Mode="In" Type="Double" />
+      <Parameter Name="quanty" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Get_Account_Type_Result">
     <Property Type="Int32" Name="Account_ID" Nullable="false" />
@@ -304,5 +344,47 @@
     <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Login_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Get_Conversation_Result">
+    <Property Type="Int32" Name="SenderID" Nullable="false" />
+    <Property Type="String" Name="MessageContent" Nullable="false" />
+    <Property Type="DateTime" Name="TimeStamp" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Get_DoctorData_byLoginID_Result">
+    <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+    <Property Type="String" Name="Doctor_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Doctor_Specialty" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Doctor_Experience" Nullable="false" />
+    <Property Type="String" Name="Doctor_Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Doctor_Phone" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Doctor_Qualification" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Doctor_Fees" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="Login_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListOfSenders_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="seenStatus" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Salesman_View_byLoginID_Result">
+    <Property Type="Int32" Name="SM_ID" Nullable="false" />
+    <Property Type="String" Name="SM_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SM_Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SM_phone" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SM_Gender" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="Login_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="View_Pending_orders_Result">
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <Property Type="Int32" Name="MedicineID" Nullable="false" />
+    <Property Type="String" Name="MedicineName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="false" />
+    <Property Type="Boolean" Name="OrderStatus" Nullable="false" />
   </ComplexType>
 </Schema>

@@ -1,0 +1,49 @@
+﻿@model List<Clinic_Automation.Models.OrderModel>
+@{
+    ViewBag.Title = "ViewPendingOrders";
+    Layout = "~/Views/Salesman/_Layout.cshtml";
+}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h2>Pending orders</h2>
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Medicine ID</th>
+        <th>Medicine Name</th>
+        <th>Quantity</th>
+        <th>Order Date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.orderID</td>
+            <td>@item.medicineID</td>
+            <td>@item.name</td>
+            <td>@item.quantity</td>
+            <td>@item.date.ToString("yyyy-MM-dd")</td>
+        </tr>
+    }
+</table>
