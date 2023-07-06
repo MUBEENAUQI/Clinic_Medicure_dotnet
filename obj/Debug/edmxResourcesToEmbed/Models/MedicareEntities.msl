@@ -297,5 +297,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_SupplierDataByLoginID" FunctionName="MedicareModel.Store.Get_SupplierDataByLoginID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MedicareModel.Get_SupplierDataByLoginID_Result">
+          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+          <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+          <ScalarProperty Name="Supplier_email" ColumnName="Supplier_email" />
+          <ScalarProperty Name="Supplier_phone" ColumnName="Supplier_phone" />
+          <ScalarProperty Name="Supplier_Gender" ColumnName="Supplier_Gender" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

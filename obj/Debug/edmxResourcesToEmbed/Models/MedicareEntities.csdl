@@ -225,6 +225,9 @@
       <Parameter Name="loginid" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="View_Pending_orders" ReturnType="Collection(MedicareModel.View_Pending_orders_Result)" />
+    <FunctionImport Name="Get_SupplierDataByLoginID" ReturnType="Collection(MedicareModel.Get_SupplierDataByLoginID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Get_Account_Type_Result">
     <Property Type="Int32" Name="Account_ID" Nullable="false" />
@@ -404,5 +407,15 @@
     <Property Type="Int32" Name="Quantity" Nullable="false" />
     <Property Type="DateTime" Name="OrderDate" Nullable="false" />
     <Property Type="Boolean" Name="OrderStatus" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Get_SupplierDataByLoginID_Result">
+    <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+    <Property Type="String" Name="Supplier_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Supplier_Gender" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Login_ID" Nullable="true" />
   </ComplexType>
 </Schema>
