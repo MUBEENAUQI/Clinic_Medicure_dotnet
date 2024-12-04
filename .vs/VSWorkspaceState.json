@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Controllers",
-    "\\Views",
-    "\\Views\\Doctor"
+    ""
   ],
-  "SelectedNode": "\\Controllers\\SalesmanController.cs",
+  "SelectedNode": "\\Web.config",
   "PreviewInSolutionExplorer": false
 }

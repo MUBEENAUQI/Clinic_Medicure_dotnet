@@ -100,6 +100,7 @@
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\NoData.jpg" />
     <Content Include="Assets\search.png" />
+    <Content Include="Assets\supplier_male.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -165,6 +166,7 @@
     <Compile Include="Models\GetMedicineList_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetMessage.cs" />
     <Compile Include="Models\Get_Account_Type_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
@@ -178,6 +180,9 @@
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Get_DoctorData_Result.cs">
+      <DependentUpon>MedicareEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Get_SupplierDataByLoginID_Result.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListOfSenders_Result.cs">
@@ -207,6 +212,7 @@
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MedicineModel.cs" />
+    <Compile Include="Models\Messaging.cs" />
     <Compile Include="Models\OrderList.cs">
       <DependentUpon>MedicareEntities.tt</DependentUpon>
     </Compile>
@@ -305,6 +311,8 @@
     <Content Include="Views\Patient\PatientProfile.cshtml" />
     <Content Include="Views\Patient\_Layout.cshtml" />
     <Content Include="Views\Patient\UpdatePatient.cshtml" />
+    <Content Include="Views\Supplier\Message.cshtml" />
+    <Content Include="Views\Supplier\SupplierProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

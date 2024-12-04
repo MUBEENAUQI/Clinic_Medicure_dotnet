@@ -666,5 +666,14 @@ namespace Clinic_Automation.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<View_Pending_orders_Result>("View_Pending_orders");
         }
+    
+        public virtual ObjectResult<Get_SupplierDataByLoginID_Result> Get_SupplierDataByLoginID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_SupplierDataByLoginID_Result>("Get_SupplierDataByLoginID", idParameter);
+        }
     }
 }
